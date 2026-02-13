@@ -1,0 +1,134 @@
+/* ===== LANDING PAGE ===== */
+
+#brandPresentation {
+    text-align: center;
+    margin: 1rem auto 0;
+    padding: 0 1rem;
+}
+
+#brandPresentation h1 {
+    font-size: clamp(4rem, 10vw, 8rem);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    color: #fff;
+}
+
+#brandPresentation p {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    margin: 1rem auto 0;
+    max-width: 600px;
+}
+
+/* grid */
+.productsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    justify-content: center; 
+    justify-items: center; 
+}
+
+.card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    min-height: 280px; 
+    
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(92, 236, 134, 0.15);
+}
+
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-icon-img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 0;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+/* specific prism glow */
+.card.prism .card-icon-img { filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.4)); }
+
+.card h3 { 
+    color: #fff; 
+    font-size: 2.2rem;
+    margin: 0;
+    letter-spacing: 0.05em;
+    line-height: 1;
+}
+
+.card p { 
+    color: var(--text-muted); 
+    font-size: 1.4rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* arrow animation */
+.arrow {
+    margin-top: auto;
+    padding-top: 2rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    transform: translateX(0);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.card:hover .arrow { 
+    opacity: 1; 
+    transform: translateX(10px); 
+    text-shadow: 0 0 10px var(--primary-dim);
+}
+
+/* mobile optimization */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+    
+    .productsGrid {
+        padding: 0;
+        gap: 1.5rem;
+    }
+
+    .card {
+        padding: 2rem; 
+        min-height: auto;
+    }
+    
+    #brandPresentation h1 {
+        font-size: 4rem; 
+    }
+}
+
+/* #endregion */

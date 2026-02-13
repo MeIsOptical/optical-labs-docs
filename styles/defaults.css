@@ -1,0 +1,114 @@
+/* #region ===== VARIABLES & CONFIG ===== */
+
+:root {
+    /* brand */
+    --primary-color: #5cec86;
+    --primary-dim: #5cec8640;
+    --accent-blue: #00f2ff;
+    --accent-pink: #ff0055;
+
+    /* backgrounds */
+    --bg-void: #050505;
+    --bg-panel: rgba(20, 20, 20, 0.6); /* glass */
+    
+    /* text */
+    --text-main: #eeeeee;
+    --text-muted: #aaaaaa;
+
+    /* borders & glows */
+    --border-color: #333333;
+    --card-glow: 0 0 20px rgba(92, 236, 134, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-family: 'Jersey 10', sans-serif !important;
+}
+
+::selection {
+    background: var(--primary-color);
+    color: black;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--text-main);
+    background-color: var(--bg-void);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* #endregion */
+
+
+/* #region ===== BACKGROUND FX ===== */
+
+.stripedBg {
+    background-color: var(--bg-void);
+    background-image: linear-gradient(
+        -45deg, 
+        rgba(255,255,255,0.03) 25%, 
+        transparent 25%, 
+        transparent 50%, 
+        rgba(255,255,255,0.03) 50%, 
+        rgba(255,255,255,0.03) 75%, 
+        transparent 75%, 
+        transparent
+    );
+    background-size: 4px 4px; 
+    position: relative;
+}
+
+/* vignette */
+.stripedBg::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, transparent 0%, #000 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* #endregion */
+
+
+
+/* #region ===== TEXT ===== */
+
+.glowText {
+    color: var(--primary-color);
+    text-shadow: 0 0 20px var(--primary-dim);
+}
+
+.default-hr {
+    width: 80%;
+    height: 3px;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-color);
+    border: none;
+    margin: 3.2rem auto;
+}
+
+/* #endregion */
+
+/* #region ===== MAIN ===== */
+
+main {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+}
+
+/* #endregion */

@@ -60,7 +60,7 @@ body {
         transparent 75%, 
         transparent
     );
-    background-size: 4px 4px; 
+    background-size: 15px 15px; 
     position: relative;
 }
 
@@ -92,6 +92,10 @@ body {
     box-shadow: 0 0 15px var(--primary-color);
     border: none;
     margin: 3.2rem auto;
+}
+
+.extra-hr {
+    margin: 7rem auto;
 }
 
 /* #endregion */

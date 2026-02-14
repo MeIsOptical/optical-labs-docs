@@ -72,8 +72,7 @@
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
 }
 
-/* specific prism glow */
-.card.prism .card-icon-img { filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.4)); }
+
 
 .card h3 { 
     color: #fff; 

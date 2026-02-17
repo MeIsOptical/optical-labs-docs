@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="/styles/defaults.css">
@@ -48,7 +47,6 @@
             <div class="contentTableCategory">
                 <a href="#general-usage">General Usage</a>
                 <a href="#response-structure">Response Structure</a>
-                <a href="#error-codes">Error Codes</a>
                 <a href="#rate-limits">Rate Limits</a>
                 <a href="#billing">Billing</a>
             </div>
@@ -96,12 +94,37 @@
             <h2 id="response-structure">Response Structure</h2>
             <p>Prism's endpoints utilize a unified response structure, returning clean and structured JSON data that is simple to parse in any environment. Each response is wrapped in a consistent object containing a status indicator, a descriptive message, relevant metadata like the credits used and remaining, and the requested data. We also strictly follow standard REST practices, using appropriate HTTP status codes, headers, and clear error messages, all to ensure transparent communication with your application.</p>
         
-            <script>addJSONCodeBlock('Standard Response', { status: 200, message: "Success", metadata: { credits_used: 1, credits_remaining: 499 }, data: { result: "clean text", errors: null}});</script>
+            <!-- Example success response -->
+             <h3>Every successful request returns this wrapper:</h3>
+            <script>
+                addJSONCodeBlock('Standard Success Response Wrapper', {
+                    success: true,
+                    message: "Success",
+                    data: {
+                        meta: {
+                            used_credits: 1,
+                            remaining_credits: 12345
+                        },
+                        result: {
+                            "<endpoint_specific_schema>": "The structure of this object varies depending on the specific endpoint."
+                        }
+                    }
+                });
+            </script>
 
-            <br>
-
-            <h2 id="error-codes">Error Codes</h2>
-            <p></p>
+            <h3>In the event of an error, the 'result' field is excluded:</h3>
+            <script>
+                addJSONCodeBlock('Standard Error Response Wrapper', {
+                    success: false,
+                    message: "<error description>. Credits have been refunded.",
+                    data: {
+                        meta: {
+                            used_credits: 0,
+                            remaining_credits: 12345
+                        }
+                    }
+                });
+            </script>
 
             <br>
         

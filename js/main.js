@@ -1,17 +1,71 @@
 
 
 
+
+
+//#region ===== HELPERS =====
+
+// Function to dynamically load scripts
+function loadScript(src, callback) {
+    let script = document.createElement('script');
+    script.src = src;
+    script.onload = callback;
+    document.head.appendChild(script);
+}
+
+// Function to add a stylesheet
+function loadCSS(href, callback) {
+    let link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+
+    if (callback) {
+        link.onload = callback;
+        link.onerror = () => console.error(`Failed to load CSS: ${href}`);
+    }
+
+    document.head.appendChild(link);
+}
+
+//#endregion
+
+
+
+
+
+//#region ===== CSS & SCRIPTS =====
+
+// LENIS (SMOOTH SCROLL)
+loadScript("https://unpkg.com/lenis@1.1.20/dist/lenis.min.js", () => {
+
+    const lenis = new Lenis();
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+});
+
+
+//#endregion
+
+
+
+
+
+
+//#region ===== MOBILE CONTENT TABLE =====
 const menuBtn = document.getElementById('mobileMenuToggle');
     const contentTable = document.getElementById('contentTable');
 
     if (menuBtn && contentTable) {
-        // 1. Toggle Menu Button
+        // toggle button
         menuBtn.addEventListener('click', () => {
             contentTable.classList.toggle('active');
             menuBtn.classList.toggle('active');
         });
 
-        // 2. Close menu when a link INSIDE it is clicked
+        // close menu when a link inside it is clicked
         const links = contentTable.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', () => {
@@ -20,16 +74,14 @@ const menuBtn = document.getElementById('mobileMenuToggle');
             });
         });
 
-        // 3. NEW: Close menu when clicking OUTSIDE (on the main content)
+        // close menu when clicking outside
         document.addEventListener('click', (event) => {
-            // Only run if the menu is currently open
+
             if (!contentTable.classList.contains('active')) return;
 
-            // Check if the click target is inside the menu or the button
             const isClickInside = contentTable.contains(event.target);
             const isClickOnBtn = menuBtn.contains(event.target);
 
-            // If the click is NOT inside the menu AND NOT on the button, close it
             if (!isClickInside && !isClickOnBtn) {
                 contentTable.classList.remove('active');
                 menuBtn.classList.remove('active');
@@ -38,3 +90,4 @@ const menuBtn = document.getElementById('mobileMenuToggle');
     }
 
 
+//#endregion

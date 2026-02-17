@@ -4,8 +4,6 @@
     /* brand */
     --primary-color: #5cec86;
     --primary-dim: #5cec8640;
-    --accent-blue: #00f2ff;
-    --accent-pink: #ff0055;
 
     /* backgrounds */
     --bg-void: #050505;
@@ -23,7 +21,7 @@
 * {
     box-sizing: border-box;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    font-family: 'Jersey 10', sans-serif !important;
+    font-family: 'Jersey 10', sans-serif;
 }
 
 ::selection {

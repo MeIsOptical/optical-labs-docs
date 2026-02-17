@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="/styles/defaults.css">
@@ -23,6 +24,8 @@
 
 
 <body class="stripedBg docs-layout">
+
+    <script src="/js/codeBlocks.js"></script>
     
     <header>
 
@@ -53,55 +56,86 @@
             <div class="contentTableCategory">
                 <a href="#endpoints">Endpoints</a>
                 <a href="#profanity-censor">Profanity Censor</a>
+                <a href="#link-preview">Link Preview</a>
             </div>
         </div>
     </header>
 
+
+
+
     <main id="docs-main">
 
+        <!-- ===== INTRODUCTION ===== -->
         <section class="doc-section" id="introduction">
             <h1>Introduction</h1>
 
             <h2 id="overview">Overview</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Prism is a REST API that features various endpoints, allowing developers to easily integrate utility tools into their own projects without breaking a sweat. Built on Cloudflare's powerful infrastructure, we are able to deliver near-instant results with a consistent uptime approaching 100%.</p>
         
+            <br>
+
             <h2 id="quickstart">Quickstart</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p></p>
+
+            <br>
         
             <h2 id="authentication">Authentication</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p></p>
 
         </section>
 
+
         <hr class="default-hr extra-hr">
 
+
+        <!-- ===== GENERAL USAGE ===== -->
         <section class="doc-section" id="general-usage">
             <h1>General Usage</h1>
 
             <h2 id="response-structure">Response Structure</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Prism's endpoints utilize a unified response structure, returning clean and structured JSON data that is simple to parse in any environment. Each response is wrapped in a consistent object containing a status indicator, a descriptive message, relevant metadata like the credits used and remaining, and the requested data. We also strictly follow standard REST practices, using appropriate HTTP status codes, headers, and clear error messages, all to ensure transparent communication with your application.</p>
         
+            <script>addJSONCodeBlock('Standard Response', { status: 200, message: "Success", metadata: { credits_used: 1, credits_remaining: 499 }, data: { result: "clean text", errors: null}});</script>
+
+            <br>
+
             <h2 id="error-codes">Error Codes</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p></p>
+
+            <br>
         
             <h2 id="rate-limits">Rate Limits</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p></p>
+
+            <br>
         
             <h2 id="billing">Billing</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p></p>
         
         </section>
 
+
         <hr class="default-hr extra-hr">
 
+
+        <!-- ===== ENDPOINTS ===== -->
         <section class="doc-section" id="endpoints">
             <h1>Endpoints</h1>
 
             <h2 id="profanity-censor">Profanity Censor</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p></p>
+
+            <br>
+
+            <h2 id="link-preview">Link Preview</h2>
+            <p></p>
             
         </section>
+
     </main>
+
+
 
     <script src="/js/main.js"></script>
 

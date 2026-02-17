@@ -160,8 +160,10 @@
 
 #docs-main {
     flex-grow: 1;
-    width: auto;
+    width: 100%;
     max-width: 100%;
+    overflow-x: hidden;
+    padding: 2rem;
 }
 
 #contentTable h1 {
@@ -198,21 +200,27 @@
 }
 
 
+.doc-section {
+    margin: 0 auto;
+    width: 100%;
+    margin-right: auto;
+}
+
 .doc-section h1 {
     color: var(--primary-color);
-    font-size: 4rem;
+    font-size: clamp(3.5rem, 5vw, 15rem);
     text-decoration: underline;
     margin: 0;
 }
 
 .doc-section h2 {
     color: white;
-    font-size: 2rem;
-    margin: 2rem 0 5px 0;
+    font-size: 2.5rem;
+    margin: 2rem 0 10px 0;
 }
 
 .doc-section p {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     margin: 0;
 }
 
@@ -266,7 +274,7 @@
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         margin: 0;
-        padding: 0 1.5rem;
+        padding: 0 1rem;
         border-right: none;
         box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
@@ -284,7 +292,9 @@
     }
 
     #docs-main {
-        margin: 60px 10px 10px;
+        margin: 70px auto 10px;
+        width: 100%;
+        padding: 0 1.5rem;
     }
 
     [id] {
@@ -293,3 +303,72 @@
 }
 
 /* #endregion */
+
+
+
+
+
+
+
+
+/* #region ===== CODE BLOCKS ===== */
+
+.code-block {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin: 2rem 0 5rem;
+    width: stretch;
+    max-width: 100%;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.code-header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.3rem;
+    color: #e4e4e4;
+}
+
+.code-lang {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+.code-block pre {
+    margin: 0;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: transparent;
+    transition: none !important;
+}
+
+.code-block code {
+    display: block;
+    width: max-content;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 1.3rem;
+    color: #ffffff;
+}
+
+
+
+.code-block .key { color: #eaf1f2; }
+.code-block .string { color: var(--primary-color); }
+.code-block .number { color: #7ce0ff; }
+.code-block .boolean { color: #ffc258; font-weight: bold; }
+.code-block .null { color: #c5c5c5; font-style: italic; text-transform: uppercase; }
+
+
+/* #endregion */
+

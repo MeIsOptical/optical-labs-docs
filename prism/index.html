@@ -64,22 +64,44 @@
 
     <main id="docs-main">
 
-        <!-- ===== INTRODUCTION ===== -->
         <section class="doc-section" id="introduction">
             <h1>Introduction</h1>
 
             <h2 id="overview">Overview</h2>
+
             <p>Prism is a REST API that features various endpoints, allowing developers to easily integrate utility tools into their own projects without breaking a sweat. Built on Cloudflare's powerful infrastructure, we are able to deliver near-instant results with a consistent uptime approaching 100%.</p>
-        
+
             <br>
 
             <h2 id="quickstart">Quickstart</h2>
-            <p></p>
+            
+            <p>Getting started with Prism is straightforward. You will need an API Key, which acts as your unique identifier and wallet for your credits. Once you have your key, you can make requests to any of our endpoints using standard HTTP methods.</p>
+
+            <h3>Here is a simple example of a request to check for profanity using curl:</h3>
+
+            <script>
+                addCodeBlock("Example", "bash",
+`curl -X POST https://prism.optical-labs.ca/text/profanity \\
+    -H "Authorization: Bearer <YOUR_API_KEY>" \\
+    -H "Content-Type: application/json" \\
+    -d '{
+        "text": "Hello world!",
+        "strictness": 2,
+        "mask_style": "full"
+    }'`);
+            </script>
 
             <br>
         
             <h2 id="authentication">Authentication</h2>
-            <p></p>
+            
+            <p>Prism uses Bearer Token authentication. This means you must include your API key in the HTTP headers of every request you make.</p>
+
+            <p>API keys always start with the prefix <span class="inline-code">sk_prism_</span> followed by a unique identifier. You can obtain a key by purchasing credits. Once you receive your key, store it securely; it will only be shown to you once. Also note that your API key is permanently linked to the email address you provide at checkout.</p>
+
+            <p>To authenticate, add the following header to your request: <span class="inline-code">Authorization: Bearer &ltYOUR_API_KEY&gt</span></p>
+
+            <p>If your key is missing, invalid, or if you have insufficient credits, the API will return a <span class="inline-code">401 Unauthorized</span> or <span class="inline-code">403 Forbidden</span> error.</p>
 
         </section>
 
@@ -87,15 +109,15 @@
         <hr class="default-hr extra-hr">
 
 
-        <!-- ===== GENERAL USAGE ===== -->
         <section class="doc-section" id="general-usage">
             <h1>General Usage</h1>
 
             <h2 id="response-structure">Response Structure</h2>
-            <p>Prism's endpoints utilize a unified response structure, returning clean and structured JSON data that is simple to parse in any environment. Each response is wrapped in a consistent object containing a status indicator, a descriptive message, relevant metadata like the credits used and remaining, and the requested data. We also strictly follow standard REST practices, using appropriate HTTP status codes, headers, and clear error messages, all to ensure transparent communication with your application.</p>
+            <p>Prism's endpoints use a unified response structure, returning clean and structured JSON data that is simple to parse in any environment. Each response is wrapped in a consistent object containing a status indicator, a descriptive message, relevant metadata like the credits used and remaining, and the requested data.</p> 
+            
+            <p>We strictly follow standard REST practices, using appropriate HTTP status codes (2xx for success, 4xx for client errors, 5xx for server errors) to ensure transparent communication with your application.</p>
         
-            <!-- Example success response -->
-             <h3>Every successful request returns this wrapper:</h3>
+            <h3>Every successful request returns this wrapper:</h3>
             <script>
                 addJSONCodeBlock('Standard Success Response Wrapper', {
                     success: true,
@@ -106,18 +128,17 @@
                             remaining_credits: 12345
                         },
                         result: {
-                            "<endpoint_specific_schema>": "The structure of this object varies depending on the specific endpoint."
+                            "<endpoint_specific_schema>": "This object varies depending on the endpoint."
                         }
                     }
                 });
             </script>
 
-            <!-- Example error response -->
             <h3>In the event of an error, the 'result' field is excluded:</h3>
             <script>
                 addJSONCodeBlock('Standard Error Response Wrapper', {
                     success: false,
-                    message: "<error description>. Credits have been refunded.",
+                    message: "Internal Error: <description>. Credits have been refunded.",
                     data: {
                         meta: {
                             used_credits: 0,
@@ -129,13 +150,12 @@
 
             <br>
 
-            <!-- Rate limits -->
             <h2 id="rate-limits">Rate Limits</h2>
-            <p>To ensure the security and stability of Prism, we use a system consisting of multiple levels of rate limiting.</p>
+            <p>To ensure the security and stability of Prism, we enforce rate limits at multiple levels. These limits are designed to be generous enough for high-volume production apps while preventing abuse.</p>
 
             <br>
 
-            <p>If you exceed these limits, you will receive a <span class="inline-code">429 (Too many requests)</span> error following our <a href="#response-structure">standard error response wrapper</a>.</p>
+            <p>For user and server limits, you will receive a <span class="inline-code">429 Too Many Requests</span> error following our <a href="#response-structure">standard error response wrapper</a>. However, extreme traffic spikes will trigger our global edge protection.</p>
 
             <div class="table-wrapper">
                 <table>
@@ -144,7 +164,7 @@
                             <th>Level</th>
                             <th>Limit</th>
                             <th>Identified By</th>
-                            <th>Error Code</th>
+                            <th>Error Response</th>
                         </tr>
                     </thread>
                     <tbody>
@@ -152,28 +172,91 @@
                             <td>User</td>
                             <td>120 requests/minute</td>
                             <td><span class="inline-code">X-Forwarded-For</span> Header</td>
-                            <td><span class="inline-code">429 Too Many Requests</span></td>
+                            <td><span class="inline-code">429 (JSON)</span></td>
                         </tr>
                         <tr>
                             <td>Server</td>
                             <td>2000 requests/minute</td>
                             <td>Incoming IP Address</td>
-                            <td><span class="inline-code">429 Too Many Requests</span></td>
+                            <td><span class="inline-code">429 (JSON)</span></td>
                         </tr>
                         <tr>
                             <td>Global</td>
                             <td>400 requests/10 seconds</td>
                             <td>Incoming IP Address</td>
-                            <td><span class="inline-code">1015 Too Many Requests</span></td>
+                            <td><span class="inline-code">1015 (HTML)</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
+            <h3>Forwarding User IPs</h3>
+            <p>If you are calling Prism from your backend server, our API sees your server's IP address as a simple user by default. This means all your customers share the 120 req/min limit, which you will likely hit quickly.</p>
+
+            <p>To avoid this, you should forward your user's IP address in the headers. Prism checks for the <span class="inline-code">X-Forwarded-For</span> header to identify unique users. If provided, the 120 req/min limit applies to that specific IP, while your server falls under the much higher 2000 req/min limit.</p>
+
+            <p>Example header to pass individual user rate limits: <span class="inline-code">"X-Forwarded-For": "203.0.113.195"</span></p>
+
+            <p><strong class="highlight-danger">Important:</strong> You are strictly prohibited from sending fake or randomized IP addresses in this header to bypass rate limits. Abuse of this feature is easily detected and will result in the <strong class="highlight-danger">immediate and permanent revocation</strong> of your API key.</p>
+
             <br>
         
             <h2 id="billing">Billing</h2>
-            <p></p>
+            <p>Prism operates on a prepaid credit system rather than a recurring subscription to ensure you never pay for idle time. One credit roughly equals one standard API execution, but more complex endpoints may cost more.</p>
+
+            <p>Credits are deducted from your balance immediately upon a successful request. If the request returns an error, the credits will be refunded for that request in the majority of cases. You only pay for successful results.</p>
+
+            <h3>Credit Packs:</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thread>
+                        <tr>
+                            <th>Pack Name</th>
+                            <th>Credits</th>
+                            <th>Price (USD)</th>
+                            <th>Cost per Credit</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        <tr>
+                            <td>Tester</td>
+                            <td>1,000</td>
+                            <td>$1.99</td>
+                            <td>$0.002</td>
+                        </tr>
+                        <tr>
+                            <td>Indie</td>
+                            <td>5,000</td>
+                            <td>$4.99</td>
+                            <td>$0.001</td>
+                        </tr>
+                        <tr>
+                            <td>Startup</td>
+                            <td>20,000</td>
+                            <td>$14.99</td>
+                            <td>$0.00075</td>
+                        </tr>
+                        <tr>
+                            <td>Pro</td>
+                            <td>50,000</td>
+                            <td>$29.99</td>
+                            <td>$0.0006</td>
+                        </tr>
+                        <tr>
+                            <td>Business</td>
+                            <td>100,000</td>
+                            <td>$49.99</td>
+                            <td>$0.0005</td>
+                        </tr>
+                        <tr>
+                            <td>Enterprise</td>
+                            <td>400,000</td>
+                            <td>$119.99</td>
+                            <td>$0.0003</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         
         </section>
 
@@ -181,19 +264,14 @@
         <hr class="default-hr extra-hr">
 
 
-        <!-- ===== ENDPOINTS ===== -->
         <section class="doc-section" id="endpoints">
             <h1>Endpoints</h1>
 
             <h2 id="profanity-censor">Profanity Censor</h2>
-            <p></p>
-
             <br>
 
             <h2 id="link-preview">Link Preview</h2>
-            <p></p>
-            
-        </section>
+            </section>
 
     </main>
 

@@ -45,17 +45,42 @@ function formatJSON(obj, indent = 0) {
 
 
 
-function addJSONCodeBlock(title, code) {
+function addJSONCodeBlock(pTitle, pCode) {
     const scriptTag = document.currentScript;
     const block = document.createElement('div');
     block.className = 'code-block';
 
     block.innerHTML = `
         <div class="code-header">
-            <span>${title}</span>
+            <span>${pTitle}</span>
             <span class="code-lang">JSON</span>
         </div>
-        <pre><code>${formatJSON(code)}</code></pre>
+        <pre><code>${formatJSON(pCode)}</code></pre>
+    `;
+
+    scriptTag.parentElement.insertBefore(block, scriptTag);
+}
+
+
+
+
+
+function addCodeBlock(pTitle, pCodeLang, pCode) {
+    const scriptTag = document.currentScript;
+    const block = document.createElement('div');
+    block.className = 'code-block';
+
+    const safeCode = pCode
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+    block.innerHTML = `
+        <div class="code-header">
+            <span>${pTitle}</span>
+            <span class="code-lang">${pCodeLang}</span>
+        </div>
+        <pre><code>${safeCode}</code></pre>
     `;
 
     scriptTag.parentElement.insertBefore(block, scriptTag);

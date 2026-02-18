@@ -24,6 +24,8 @@
     font-family: 'Jersey 10', sans-serif;
 }
 
+
+
 ::selection {
     background: var(--primary-color);
     color: black;

@@ -243,7 +243,14 @@
 
 .doc-section p {
     font-size: 1.45rem;
-    margin: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.doc-section .highlight-danger {
+    font-size: 105%;
+    color: #ff5c5c;
+    font-weight: normal;
+    text-decoration: underline;
 }
 
 .doc-section br {
@@ -373,6 +380,8 @@
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
     -webkit-overflow-scrolling: touch;
     background: transparent;
     transition: none !important;
@@ -382,8 +391,12 @@
     display: block;
     width: max-content;
     font-family: monospace !important;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #ffffff;
+}
+
+.code-block code span {
+    font-family: monospace !important;
 }
 
 
@@ -411,6 +424,8 @@
     width: 100%;
     margin: 2rem 0 3rem;
     overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
     background: var(--bg-panel);
     border: 1.5px solid var(--primary-color);
     backdrop-filter: blur(10px);

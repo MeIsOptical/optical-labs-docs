@@ -112,6 +112,7 @@
                 });
             </script>
 
+            <!-- Example error response -->
             <h3>In the event of an error, the 'result' field is excluded:</h3>
             <script>
                 addJSONCodeBlock('Standard Error Response Wrapper', {
@@ -127,9 +128,47 @@
             </script>
 
             <br>
-        
+
+            <!-- Rate limits -->
             <h2 id="rate-limits">Rate Limits</h2>
-            <p></p>
+            <p>To ensure the security and stability of Prism, we use a system consisting of multiple levels of rate limiting.</p>
+
+            <br>
+
+            <p>If you exceed these limits, you will receive a <span class="inline-code">429 (Too many requests)</span> error following our <a href="#response-structure">standard error response wrapper</a>.</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thread>
+                        <tr>
+                            <th>Level</th>
+                            <th>Limit</th>
+                            <th>Identified By</th>
+                            <th>Error Code</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        <tr>
+                            <td>User</td>
+                            <td>120 requests/minute</td>
+                            <td><span class="inline-code">X-Forwarded-For</span> Header</td>
+                            <td><span class="inline-code">429 Too Many Requests</span></td>
+                        </tr>
+                        <tr>
+                            <td>Server</td>
+                            <td>2000 requests/minute</td>
+                            <td>Incoming IP Address</td>
+                            <td><span class="inline-code">429 Too Many Requests</span></td>
+                        </tr>
+                        <tr>
+                            <td>Global</td>
+                            <td>400 requests/10 seconds</td>
+                            <td>Incoming IP Address</td>
+                            <td><span class="inline-code">1015 Too Many Requests</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <br>
         

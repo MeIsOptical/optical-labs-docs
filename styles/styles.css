@@ -228,15 +228,31 @@
     text-decoration: underline;
 }
 
+.doc-section a {
+    color: var(--primary-color);
+}
+
+.inline-code {
+    color: white;
+    display: inline-block;
+    background: #2d2d2d;
+    margin: 0; padding: 0.2rem 0.4rem;
+    font-size: 85%;
+    border-radius: 5px;
+}
+
 .doc-section p {
-    font-size: 1.4rem;
+    font-size: 1.45rem;
     margin: 0;
+}
+
+.doc-section br {
+    height: 20rem;
 }
 
 #mobileMenuToggle {
     display: none;
 }
-
 
 @media (max-width: 768px) {
     
@@ -324,13 +340,13 @@
 
 .code-block {
     background: var(--bg-panel);
-    border: 1px solid var(--border-color);
+    border: 1.5px solid var(--primary-color);
     border-radius: 8px;
     margin: 1.2rem 0 3rem;
     width: stretch;
     max-width: 100%;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0px 5px var(--primary-color);
 }
 
 .code-header {
@@ -379,6 +395,71 @@
 .code-block .null { color: #c5c5c5; font-style: italic; text-transform: uppercase; }
 .code-block .placeholder { color: #ffa46f; font-style: italic; }
 
+
+/* #endregion */
+
+
+
+
+
+
+
+/* #region ===== TABLES ===== */
+
+
+.table-wrapper {
+    width: 100%;
+    margin: 2rem 0 3rem;
+    overflow-x: auto;
+    background: var(--bg-panel);
+    border: 1.5px solid var(--primary-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 0px 5px var(--primary-color);
+}
+
+
+.doc-section table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    white-space: nowrap;
+}
+
+.doc-section th,
+.doc-section td {
+    padding: 1.4rem 1.2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.doc-section th {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.doc-section td {
+    color: var(--text-main);
+    font-size: 1.3rem;
+}
+
+.doc-section tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.doc-section tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.doc-section tbody tr:hover {
+    background-color: rgba(92, 236, 134, 0.05);
+}
 
 /* #endregion */
 

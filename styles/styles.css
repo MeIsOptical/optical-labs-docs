@@ -206,6 +206,26 @@
     margin-right: auto;
 }
 
+#docs-title-div {
+    margin: 10px 0 0;
+}
+
+#docs-title-div h1 {
+    text-align: center;
+    color: var(--primary-color);
+    --base-font-size: clamp(2rem, 4.3vw, 18rem);
+    font-size: var(--base-font-size);
+    margin: -0.15em 0; padding: 0;
+    letter-spacing: 2px;
+    text-shadow: var(--primary-dim) 0 0 0.2em;
+}
+
+#docs-title-div h1:nth-child(2) {
+    font-size: calc(var(--base-font-size) * 1.15);
+    text-decoration: underline;
+}
+
+
 .doc-section h1 {
     color: var(--primary-color);
     font-size: clamp(3.5rem, 5vw, 15rem);

@@ -44,6 +44,24 @@ loadScript("https://unpkg.com/lenis@1.1.20/dist/lenis.min.js", () => {
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
+
+    // smooth url movement
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            // stop default browser jump
+            e.preventDefault();
+
+            // move to target
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+            lenis.scrollTo(targetElement); 
+            
+            // manually update url
+            window.history.pushState(null, null, targetId); 
+            }
+        });
+    });
 });
 
 

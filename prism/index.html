@@ -70,20 +70,22 @@
 
             <h2 id="overview">Overview</h2>
 
+            <p>Welcome to Prism's official documentation! Whether you're just starting out or already an expert, this guide is designed to help you integrate our API into your code quickly and efficiently.</p>
+
             <p>Prism is a REST API that features various endpoints, allowing developers to easily integrate utility tools into their own projects without breaking a sweat. Built on Cloudflare's powerful infrastructure, we are able to deliver near-instant results with a consistent uptime approaching 100%.</p>
 
             <br>
 
             <h2 id="quickstart">Quickstart</h2>
             
-            <p>Getting started with Prism is straightforward. You will need an API Key, which acts as your unique identifier and wallet for your credits. Once you have your key, you can make requests to any of our endpoints using standard HTTP methods.</p>
+            <p>To get started, you will need API credentials. After completing your first checkout, you will be issued both a public and a secret API key. Once you have your keys, you can make requests to any of our endpoints using standard HTTP methods. Note that your secret key is used for authentication and should be kept secure.</p>
 
             <h3>Here is a simple example of a request to check for profanity using curl:</h3>
 
             <script>
                 addCodeBlock("Example", "bash",
 `curl -X POST https://prism.optical-labs.ca/text/profanity \\
-    -H "Authorization: Bearer <YOUR_API_KEY>" \\
+    -H "Authorization: Bearer <YOUR_SECRET_API_KEY>" \\
     -H "Content-Type: application/json" \\
     -d '{
         "text": "Hello world!",
@@ -96,11 +98,11 @@
         
             <h2 id="authentication">Authentication</h2>
             
-            <p>Prism uses Bearer Token authentication. This means you must include your API key in the HTTP headers of every request you make.</p>
+            <p>Prism uses Bearer Token authentication. This means you must include your secret API key in the HTTP headers of every request you make.</p>
 
-            <p>API keys always start with the prefix <span class="inline-code">sk_prism_</span> followed by a unique identifier. You can obtain a key by purchasing credits. Once you receive your key, store it securely; it will only be shown to you once. Also note that your API key is permanently linked to the email address you provide at checkout.</p>
+            <p>API keys always start with the prefix <span class="inline-code">sk_prism_</span> (secret key), or <span class="inline-code">pk_prism</span> (public key) followed by a unique identifier. You can obtain your credentials by purchasing credits. Once you receive your keys, store them securely; they will only be shown to you once. Also note that your API keys are permanently linked to the email address you provide at checkout.</p>
 
-            <p>To authenticate, add the following header to your request: <span class="inline-code">Authorization: Bearer &ltYOUR_API_KEY&gt</span></p>
+            <p>To authenticate, add the following header to your request: <span class="inline-code">Authorization: Bearer &ltYOUR_SECRET_API_KEY&gt</span></p>
 
             <p>If your key is missing, invalid, or if you have insufficient credits, the API will return a <span class="inline-code">401 Unauthorized</span> or <span class="inline-code">403 Forbidden</span> error.</p>
 
@@ -123,6 +125,7 @@
                 addJSONCodeBlock('Standard Success Response Wrapper', {
                     success: true,
                     message: "Success",
+                    execution_time: 179,
                     data: {
                         meta: {
                             used_credits: 1,
@@ -140,6 +143,7 @@
                 addJSONCodeBlock('Standard Error Response Wrapper', {
                     success: false,
                     message: "Internal Error: <description>. Credits have been refunded.",
+                    execution_time: 179,
                     data: {
                         meta: {
                             used_credits: 0,
@@ -171,19 +175,19 @@
                     <tbody>
                         <tr>
                             <td>User</td>
-                            <td>120 requests/minute</td>
+                            <td>120 Requests/minute</td>
                             <td><span class="inline-code">X-Forwarded-For</span> Header</td>
                             <td><span class="inline-code">429 (JSON)</span></td>
                         </tr>
                         <tr>
                             <td>Server</td>
-                            <td>2000 requests/minute</td>
-                            <td>Incoming IP Address</td>
+                            <td>1200 Requests/minute</td>
+                            <td>API Key Used</td>
                             <td><span class="inline-code">429 (JSON)</span></td>
                         </tr>
                         <tr>
                             <td>Global</td>
-                            <td>400 requests/10 seconds</td>
+                            <td>240 Requests/10 seconds</td>
                             <td>Incoming IP Address</td>
                             <td><span class="inline-code">1015 (HTML)</span></td>
                         </tr>
@@ -192,9 +196,9 @@
             </div>
 
             <h3>Forwarding User IPs</h3>
-            <p>If you are calling Prism from your backend server, our API sees your server's IP address as a simple user by default. This means all your customers share the 120 req/min limit, which you will likely hit quickly.</p>
+            <p>If you are calling Prism from your backend server, our API sees your server's IP address as a simple user by default. This means all your customers share the 120 reqs/min limit, which you might hit quickly depending on your traffic.</p>
 
-            <p>To avoid this, you should forward your user's IP address in the headers. Prism checks for the <span class="inline-code">X-Forwarded-For</span> header to identify unique users. If provided, the 120 req/min limit applies to that specific IP, while your server falls under the much higher 2000 req/min limit.</p>
+            <p>To avoid this, you should forward your user's IP address in the headers. Prism checks for the <span class="inline-code">X-Forwarded-For</span> header to identify unique users. If provided, the 120 reqs/min limit applies to that specific IP, while your server falls under the much higher 1200 reqs/min limit.</p>
 
             <p>Example header to pass individual user rate limits: <span class="inline-code">"X-Forwarded-For": "203.0.113.195"</span></p>
 
@@ -207,6 +211,7 @@
 
             <p>Credits are deducted from your balance immediately upon a successful request. If the request returns an error, the credits will be refunded for that request in the majority of cases. You only pay for successful results.</p>
 
+            <!-- credit prices -->
             <h3>Credit Packs:</h3>
             <div class="table-wrapper">
                 <table>
@@ -258,6 +263,38 @@
                     </tbody>
                 </table>
             </div>
+
+
+            <!-- endpoint costs in credits -->
+            <h3>Costs of endpoints:</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thread>
+                        <tr>
+                            <th>Endpoint</th>
+                            <th>Cost</th>
+                            <th>Description</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        <tr>
+                            <td>Profanity Censor</td>
+                            <td>1 credit</td>
+                            <td>Remove bad words from a text.</td>
+                        </tr>
+                        <tr>
+                            <td>Link Preview</td>
+                            <td>1 credit</td>
+                            <td>Retrieve various content from a url.</td>
+                        </tr>
+                        <tr>
+                            <td>OG Image Generation</td>
+                            <td>10-22 credits</td>
+                            <td>Generate dynamic thumbnails from text values.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         
         </section>
 
@@ -269,19 +306,22 @@
             <h1>Endpoints</h1>
 
             <h2 id="profanity-censor">Profanity Censor</h2>
-            <p>Documentation coming soon.</p>
+            <p>The profanity censor endpoint lets you input a text, and returns a censored version of the original text. Multiple optional personalization options available like a strictness level, censor style, a custom list of blacklisted words, and a custom list of whitelisted words.</p>
+            <a href="./profanity-censor/" class="sub-page-btn">See documentation</a>
 
+            <br>
             <br>
 
             <h2 id="link-preview">Link Preview</h2>
-            <p>Documentation coming soon.</p>
+            <p>Endpoint not available yet.</p>
 
+            <br>
             <br>
 
             <h2 id="og-image-generation">OG Image Generation</h2>
-            <p>Documentation coming soon.</p>
+            <p>Endpoint not available yet.</p>
 
-            </section>
+        </section>
 
     </main>
 

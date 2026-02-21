@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="/styles/defaults.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+
+    <title>Prism Docs | Optical Labs</title>
+
+    <meta name="description" content="Optical Labs Documentation - Prism API">
+    <link rel="icon" href="/images/prism/prism logo.webp" type="image/x-icon">
+</head>
+
+
+
+<body class="stripedBg docs-layout">
+
+    <script src="/js/codeBlocks.js"></script>
+    
+    <header>
+
+        <button id="mobileMenuToggle">
+            <span>Table of Contents</span>
+            <span id="menuArrow">▼</span>
+        </button>
+
+        <div id="contentTable">
+
+            <h1 id="contentTableTitle">Content Table</h1>
+
+            <div class="contentTableCategory">
+                <a href="#usage">Usage</a>
+                <a href="#description">Description</a>
+                <a href="#method-path">Method & Path</a>
+                <a href="#body-fields">Body Fields</a>
+                <a href="#response-schema">Response Schema</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="#examples">Examples</a>
+                <a href="#simplest-example">Simplest Usage</a>
+                <a href="#strictness-level-example">Strictness Level</a>
+                <a href="#mask-style-example">Mask Style</a>
+                <a href="#custom-lists-example">Custom Lists</a>
+                <a href="#all-at-once-example">All at Once</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="/prism/#profanity-censor">Go Back</a>
+            </div>
+
+        </div>
+    </header>
+
+
+
+
+    <main id="docs-main">
+
+        <section class="doc-section" id="usage">
+            <h1>Usage</h1>
+
+            <h2 id="description">Description</h2>
+
+            <br>
+
+            <h2 id="method-path">Method & Path</h2>
+
+            <br>
+
+            <h2 id="body-fields">Body Fields</h2>
+
+            <br>
+
+            <h2 id="response-schema">Response Schema</h2>
+
+        </section>
+
+
+        <hr class="default-hr extra-hr">
+
+
+        <section class="doc-section" id="examples">
+            <h1>Examples</h1>
+
+            <h2 id="simplest-example">Simplest Usage</h2>
+            <p>Assuming that the word "bad" is a profanity:</p>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    "text": "This sentence contains a bad word."
+                });
+            </script>
+            <p>The response includes the full configuration used for the request, including default values for any undefined parameters.</p>
+            <script>
+                addJSONCodeBlock('Response', {
+                    "sanitized_text": "This sentence contains a *** word.",
+                    "strictness": 2,
+                    "mask_style": "full",
+                    "censored_count": 1
+                });
+            </script>
+            
+            <br>
+
+            <h2 id="strictness-level-example">Strictness Level</h2>
+            <p>Assuming that the word "bad" is a <span style="text-decoration: underline;">level 2</span> profanity:</p>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    "text": "This sentence contains a bad word.",
+                    strictness: 1
+                });
+            </script>
+            <p>Since the request strictness (1) is lower than the word's profanity level (2), the text remains uncensored.</p>
+            <script>
+                addJSONCodeBlock('Response', {
+                    "sanitized_text": "This sentence contains a bad word.",
+                    "strictness": 1,
+                    "mask_style": "full",
+                    "censored_count": 0
+                });
+            </script>
+            
+            <br>
+
+            <h2 id="mask-style-example">Mask Style</h2>
+            <p>Assuming that the word "bad" is a profanity:</p>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    "text": "This sentence contains a bad word.",
+                    "mask_style": "comic"
+                });
+            </script>
+            <script>
+                addJSONCodeBlock('Response', {
+                    "sanitized_text": "This sentence contains a $#! word.",
+                    "strictness": 2,
+                    "mask_style": "comic",
+                    "censored_count": 1
+                });
+            </script>
+            
+            <br>
+
+            <h2 id="custom-lists-example">Custom Lists</h2>
+            
+            <br>
+
+            <h2 id="all-at-once-example">All at Once</h2>
+
+        </section>
+
+    </main>
+
+
+
+    <script src="/js/main.js"></script>
+
+</body>
+
+
+</html>

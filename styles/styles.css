@@ -163,7 +163,7 @@
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
-    padding: 2rem;
+    padding: 2rem 3.5rem;
 }
 
 #contentTable h1 {
@@ -236,9 +236,10 @@
     color: white;
     display: inline-block;
     background: #2d2d2d;
-    margin: 0; padding: 0.2rem 0.4rem;
+    margin: 0; padding: 0.3rem 0.4rem;
     font-size: 85%;
     border-radius: 5px;
+    text-align: center;
 }
 
 .doc-section p {
@@ -255,6 +256,23 @@
 
 .doc-section br {
     height: 20rem;
+}
+
+
+.sub-page-btn {
+    display: inline-flex;
+    text-align: center;
+    font-size: 1.6rem;
+    padding: 0.5rem 1em;
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+    background-color: var(--bg-panel);
+    text-decoration: none;
+}
+
+.sub-page-btn:hover {
+    translate: 5px; 
+    box-shadow: 0 0 7px var(--primary-color); 
 }
 
 #mobileMenuToggle {
@@ -326,7 +344,7 @@
     #docs-main {
         margin: 70px auto 10px;
         width: 100%;
-        padding: 0 1.5rem;
+        padding: 0 1.2rem;
     }
 
     [id] {

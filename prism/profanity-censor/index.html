@@ -92,6 +92,8 @@
         <section class="doc-section" id="examples">
             <h1>Examples</h1>
 
+            <p>Don't forget that results are always wrapped in a <a href="../#response-structure">response wrapper</a>!</p>
+
             <h2 id="minimum-example">Minimum Usage</h2>
             <p>Assuming that the word "bad" is a profanity:</p>
             <script>
@@ -101,7 +103,7 @@
             </script>
             <p>The response includes the full configuration used for the request, including default values for any undefined parameters.</p>
             <script>
-                addJSONCodeBlock('Response', {
+                addJSONCodeBlock('Unwrapped Result', {
                     "sanitized_text": "This sentence contains a *** word.",
                     "strictness": 2,
                     "mask_style": "full",
@@ -121,7 +123,7 @@
             </script>
             <p>Since the request strictness (1) is lower than the word's profanity level (2), the text remains uncensored.</p>
             <script>
-                addJSONCodeBlock('Response', {
+                addJSONCodeBlock('Unwrapped Result', {
                     "sanitized_text": "This sentence contains a bad word.",
                     "strictness": 1,
                     "mask_style": "full",
@@ -140,7 +142,7 @@
                 });
             </script>
             <script>
-                addJSONCodeBlock('Response', {
+                addJSONCodeBlock('Unwrapped Result', {
                     "sanitized_text": "This sentence contains a $#! word.",
                     "strictness": 2,
                     "mask_style": "comic",

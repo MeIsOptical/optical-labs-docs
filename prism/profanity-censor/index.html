@@ -112,7 +112,7 @@
             <p>The response includes the full configuration used for the request, including default values for any undefined parameters:</p>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "sanitized_text": "This sentence contains a *** word.",
+                    "censored_text": "This sentence contains a *** word.",
                     "strictness": 2,
                     "mask_style": "full",
                     "blacklist": [],
@@ -134,7 +134,7 @@
             <p>Since the request strictness (1) is lower than the word's profanity level (2), the text remains uncensored:</p>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "sanitized_text": "This sentence contains a bad word.",
+                    "censored_text": "This sentence contains a bad word.",
                     "strictness": 1,
                     "mask_style": "full",
                     "blacklist": [],
@@ -153,10 +153,10 @@
                     "mask_style": "comic"
                 });
             </script>
-            <p>Words are censored differently:</p>
+            <p>Profanity are censored differently:</p>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "sanitized_text": "This sentence contains a $#! word.",
+                    "censored_text": "This sentence contains a $#! word.",
                     "strictness": 2,
                     "mask_style": "comic",
                     "blacklist": [],
@@ -179,7 +179,7 @@
             <p>Blacklist forbids "banana" and whitelist allows "bad":</p>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "sanitized_text": "I'm a bad ******!",
+                    "censored_text": "I'm a bad ******!",
                     "strictness": 2,
                     "mask_style": "full",
                     "blacklist": ["banana"],
@@ -203,7 +203,7 @@
             </script>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "sanitized_text": "This s*nt*nc* contains a bad w*rd.",
+                    "censored_text": "This s*nt*nc* contains a bad w*rd.",
                     "strictness": 3,
                     "mask_style": "vowels",
                     "blacklist": ["sentence", "word"],

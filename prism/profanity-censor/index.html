@@ -113,11 +113,11 @@
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
                     "censored_text": "This sentence contains a *** word.",
+                    "censored_count": 1,
                     "strictness": 2,
                     "mask_style": "full",
                     "blacklist": [],
-                    "whitelist": [],
-                    "censored_count": 1
+                    "whitelist": []
                 });
             </script>
             
@@ -135,11 +135,11 @@
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
                     "censored_text": "This sentence contains a bad word.",
+                    "censored_count": 0,
                     "strictness": 1,
                     "mask_style": "full",
                     "blacklist": [],
-                    "whitelist": [],
-                    "censored_count": 0
+                    "whitelist": []
                 });
             </script>
             
@@ -157,11 +157,11 @@
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
                     "censored_text": "This sentence contains a $#! word.",
+                    "censored_count": 1,
                     "strictness": 2,
                     "mask_style": "comic",
                     "blacklist": [],
-                    "whitelist": [],
-                    "censored_count": 1
+                    "whitelist": []
                 });
             </script>
             
@@ -180,11 +180,11 @@
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
                     "censored_text": "I'm a bad ******!",
+                    "censored_count": 1,
                     "strictness": 2,
                     "mask_style": "full",
                     "blacklist": ["banana"],
-                    "whitelist": ["bad"],
-                    "censored_count": 1
+                    "whitelist": ["bad"]
                 });
             </script>
             
@@ -204,11 +204,11 @@
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
                     "censored_text": "This s*nt*nc* contains a bad w*rd.",
+                    "censored_count": 2,
                     "strictness": 3,
                     "mask_style": "vowels",
                     "blacklist": ["sentence", "word"],
-                    "whitelist": ["bad"],
-                    "censored_count": 2
+                    "whitelist": ["bad"]
                 });
             </script>
 

@@ -77,11 +77,24 @@
             <h1>Usage</h1>
 
             <h2 id="description">Description</h2>
-            <p>With Prism's profanity censor endpoint, you can</p>
+            <p>The profanity censor endpoint lets you input a text, and then returns a censored version of the original text. Multiple optional personalization options are available like a strictness level, censor style, a custom list of blacklisted words, and a custom list of whitelisted words.</p>
 
             <br>
 
             <h2 id="method-path">Method & Path</h2>
+            <p>Use <span class="inline-code">https://prism.optical-labs.ca/text/profanity</span> to access the endpoint. The method must be <span class="inline-code">POST</span> and the header should include your secret API key, as shown below:</p>
+
+            <script>
+                addCodeBlock("Example", "bash",
+`curl -X POST https://prism.optical-labs.ca/text/profanity \\
+    -H "Authorization: Bearer <YOUR_SECRET_API_KEY>" \\
+    -H "Content-Type: application/json" \\
+    -d '{
+        "text": "Hello world!",
+        "strictness": 2,
+        "mask_style": "full"
+    }'`);
+            </script>
 
             <br>
 

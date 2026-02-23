@@ -42,7 +42,7 @@
                 <a href="#description">Description</a>
                 <a href="#method-path">Method & Path</a>
                 <a href="#body-fields">Body Fields</a>
-                <a href="#response-schema">Response Schema</a>
+                <a href="#valid-response">Valid Response</a>
             </div>
 
             <div class="contentTableCategory">
@@ -82,7 +82,7 @@
             <br>
 
             <h2 id="method-path">Method & Path</h2>
-            <p>Use <span class="inline-code">https://prism.optical-labs.ca/text/profanity</span> to access the endpoint. The method must be <span class="inline-code">POST</span> and the header should include your secret API key, as shown below:</p>
+            <p>Use <span class="inline-code">https://prism.optical-labs.ca/text/profanity</span> to access this endpoint. The method must be <span class="inline-code">POST</span> and the header should contain your secret API key, as shown below:</p>
 
             <script>
                 addCodeBlock("Example", "bash",
@@ -100,9 +100,69 @@
 
             <h2 id="body-fields">Body Fields</h2>
 
+            <div class="table-wrapper">
+                <table>
+                    <thread>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Type</th>
+                            <th>Value</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        <tr>
+                            <td><span class="inline-code">text</span></td>
+                            <td>String (required)</td>
+                            <td>Text with a length between 1 and 5000 characters</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">strictness</span></td>
+                            <td>Integer (optional)</td>
+                            <td>From 1 to 3</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">mask_style</span></td>
+                            <td>String (optional)</td>
+                            <td>One of: <span class="inline-code">"full"</span> <span class="inline-code">"partial"</span> <span class="inline-code">"vowels"</span> <span class="inline-code">"redact"</span> <span class="inline-code">"comic"</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">blacklist</span></td>
+                            <td>Array (optional)</td>
+                            <td>From 0 to 50 elements</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">whitelist</span></td>
+                            <td>Array (optional)</td>
+                            <td>From 0 to 50 elements</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <br>
 
-            <h2 id="response-schema">Response Schema</h2>
+            <h2 id="valid-response">Valid Response</h2>
+            <script>
+                addJSONCodeBlock('Successful Response Example', {
+                    success: true,
+                    message: "Success",
+                    execution_time: 179,
+                    data: {
+                        meta: {
+                            used_credits: 1,
+                            remaining_credits: 12345
+                        },
+                        result: {
+                            "censored_text": "Hello world!",
+                            "censored_count": 0,
+                            "strictness": 2,
+                            "mask_style": "full",
+                            "blacklist": [],
+                            "whitelist": []
+                        }
+                    }
+                });
+            </script>
 
         </section>
 
@@ -112,8 +172,6 @@
 
         <section class="doc-section" id="examples">
             <h1>Examples</h1>
-
-            <p>Don't forget that results are always wrapped in a <a href="../#response-structure">response wrapper</a>!</p>
 
             <h2 id="basic-example">Basic Request</h2>
             <p>Assuming that the word "bad" is a profanity:</p>

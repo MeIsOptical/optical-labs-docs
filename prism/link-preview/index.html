@@ -49,6 +49,7 @@
                 <a href="#examples">Examples</a>
                 <a href="#basic-example">Basic Request</a>
                 <a href="#null-example">Request With Null Fields</a>
+                <a href="#redirected-example">Redirected Request</a>
             </div>
 
             <div class="contentTableCategory">
@@ -182,6 +183,26 @@
                     "description": null,
                     "image": null,
                     "icon": "https://example.com/favicon.ico"
+                });
+            </script>
+
+            <br>
+
+            <h2 id="redirected-example">Redirected Request</h2>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    "url": "https://google.com/design"
+                });
+            </script>
+            <p>If the provided URL initiates a redirect, the endpoint will automatically follow it. As a result, the final URL might not match the initial input:</p>
+            <script>
+                addJSONCodeBlock('Unwrapped Result', {
+                    "url": "https://design.google/",
+                    "domain": "design.google",
+                    "title": "Google Design - Discover the people and stories behind the products",
+                    "description": "Design resources and inspiration from Google — including the Material Design system, Google Fonts, and the people and processes behind the products.",
+                    "image": "https://storage.googleapis.com/gd-prod/images/0100ffa2-71ec-4371-a035-f612253f3fa3.0db06b6b53a87fb0.png",
+                    "icon": "https://design.google/apple-touch-icon.png"
                 });
             </script>
 

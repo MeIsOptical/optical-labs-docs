@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="/styles/defaults.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+
+    <title>Prism Docs | Optical Labs</title>
+
+    <meta name="description" content="Optical Labs Documentation - Prism API">
+    <link rel="icon" href="/images/prism/prism logo.webp" type="image/x-icon">
+</head>
+
+
+
+<body class="stripedBg docs-layout">
+
+    <script src="/js/codeBlocks.js"></script>
+    
+    <header>
+
+        <button id="mobileMenuToggle">
+            <span>Table of Contents</span>
+            <span id="menuArrow">▼</span>
+        </button>
+
+        <div id="contentTable">
+
+            <h1 id="contentTableTitle">Content Table</h1>
+
+            <div class="contentTableCategory">
+                <a href="#usage">Usage</a>
+                <a href="#description">Description</a>
+                <a href="#method-path">Method & Path</a>
+                <a href="#body-fields">Body Fields</a>
+                <a href="#valid-response">Valid Response</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="#examples">Examples</a>
+                <a href="#basic-example">Basic Request</a>
+                <a href="#null-example">Request With Null Fields</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="/prism/#link-preview">Go Back</a>
+            </div>
+
+        </div>
+    </header>
+
+
+
+
+    <main id="docs-main">
+
+        <div id="docs-title-div">
+            <h1>Prism Endpoint:</h1>
+            <h1>Link Preview</h1>
+        </div>
+
+        <hr class="default-hr">
+
+        <section class="doc-section" id="usage">
+            <h1>Usage</h1>
+
+            <h2 id="description">Description</h2>
+            <p>The link preview endpoint allows you to easily extract a URL's metadata like its title, description, and cover image to help you generate rich link previews.</p>
+
+            <br>
+
+            <h2 id="method-path">Method & Path</h2>
+            <p>Use <span class="inline-code">https://prism.optical-labs.ca/web/link-preview</span> to access this endpoint. The method must be <span class="inline-code">POST</span> and the header should contain your secret API key, as shown below:</p>
+
+            <script>
+                addCodeBlock("Example", "bash",
+`curl -X POST https://prism.optical-labs.ca/web/link-preview \\
+    -H "Authorization: Bearer <YOUR_SECRET_API_KEY>" \\
+    -H "Content-Type: application/json" \\
+    -d '{
+        "url": "https://www.youtube.com/",
+    }'`);
+            </script>
+
+            <br>
+
+            <h2 id="body-fields">Body Fields</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thread>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Type</th>
+                            <th>Value</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        <tr>
+                            <td><span class="inline-code">url</span></td>
+                            <td>String (required)</td>
+                            <td>URL with a length between 1 and 2048 characters</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+
+            <h2 id="valid-response">Valid Response</h2>
+            <script>
+                addJSONCodeBlock('Successful Response Example', {
+                    success: true,
+                    message: "Success",
+                    execution_time: 179,
+                    data: {
+                        meta: {
+                            used_credits: 1,
+                            remaining_credits: 12345
+                        },
+                        result: {
+                            "url": "https://www.youtube.com/",
+                            "domain": "www.youtube.com",
+                            "title": "Youtube",
+                            "description": "Enjoy the videos and music that you love, upload original content and share it all with friends, family and the world on YouTube.",
+                            "image": "https://www.youtube.com/img/desktop/yt_1200.png",
+                            "icon": "https://www.youtube.com/s/desktop/2a7df5b3/img/favicon.ico"
+                        }
+                    }
+                });
+            </script>
+
+        </section>
+
+
+        <hr class="default-hr extra-hr">
+
+
+        <section class="doc-section" id="examples">
+            <h1>Examples</h1>
+
+            <h2 id="basic-example">Basic Request</h2>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    "url": "https://discord.com/"
+                });
+            </script>
+            <script>
+                addJSONCodeBlock('Unwrapped Result', {
+                    "url": "https://discord.com/",
+                    "domain": "discord.com",
+                    "title": "Discord - Group Chat That’s All Fun & Games",
+                    "description": "Discord is great for playing games and chilling with friends, or even building a worldwide community. Customize your own space to talk, play, and hang out.",
+                    "image": "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/665643dd8c7ac752237b5cef_Discord-OG-1200x630.jpg",
+                    "icon": "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6266bc493fb42d4e27bb8393_847541504914fd33810e70a0ea73177e.ico"
+                });
+            </script>
+
+            <br>
+
+            <h2 id="null-example">Request With Null Fields</h2>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    "url": "https://example.com"
+                });
+            </script>
+            <p>Fields are not guaranteed to return a value. Some URLs just won't have the requested content:</p>
+            <script>
+                addJSONCodeBlock('Unwrapped Result', {
+                    "url": "https://example.com/",
+                    "domain": "example.com",
+                    "title": "Example Domain",
+                    "description": null,
+                    "image": null,
+                    "icon": "https://example.com/favicon.ico"
+                });
+            </script>
+
+        </section>
+
+    </main>
+
+
+
+    <script src="/js/main.js"></script>
+
+</body>
+
+
+</html>

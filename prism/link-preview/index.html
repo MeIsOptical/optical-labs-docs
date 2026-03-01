@@ -46,6 +46,12 @@
             </div>
 
             <div class="contentTableCategory">
+                <a href="#interactive-preview">Interactive Preview</a>
+                <a href="#preview-form">Form</a>
+                <a href="#live-response">Response</a>
+            </div>
+
+            <div class="contentTableCategory">
                 <a href="#examples">Examples</a>
                 <a href="#basic-example">Basic Request</a>
                 <a href="#null-example">Request With Null Fields</a>
@@ -138,6 +144,22 @@
                         }
                     }
                 });
+            </script>
+
+        </section>
+
+
+        <hr class="default-hr extra-hr">
+
+
+        <section class="doc-section" id="interactive-preview">
+            <h1>Interactive Preview</h1>
+            <p>Send a real request to the endpoint for free, directly from your browser!</p>
+
+            <script>
+                addInteractivePreview("web/link-preview", [
+                    { type: "text", label: `URL<span class="mandatory">*</span>`, id: "link-preview-url", key: "url", placeholder: "Type a url to preview its content", required: true}
+                ]);
             </script>
 
         </section>

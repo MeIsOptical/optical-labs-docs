@@ -31,16 +31,16 @@ function loadCSS(href, callback) {
 
 
 
-
-
 //#region ===== CSS & SCRIPTS =====
 
 // LENIS (SMOOTH SCROLL)
 loadScript("https://unpkg.com/lenis@1.1.20/dist/lenis.min.js", () => {
 
-    const lenis = new Lenis();
+    // Attach to window so codeBlocks.js can use it
+    window.lenis = new Lenis(); 
+    
     function raf(time) {
-        lenis.raf(time);
+        window.lenis.raf(time);
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
@@ -55,15 +55,20 @@ loadScript("https://unpkg.com/lenis@1.1.20/dist/lenis.min.js", () => {
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-            lenis.scrollTo(targetElement); 
-            
-            // manually update url
-            window.history.pushState(null, null, targetId); 
+                window.lenis.scrollTo(targetElement); 
+                
+                // manually update url
+                window.history.pushState(null, null, targetId); 
             }
         });
     });
 });
 
+
+
+
+// FONT AWESOME
+loadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
 
 //#endregion
 
@@ -109,3 +114,6 @@ const menuBtn = document.getElementById('mobileMenuToggle');
 
 
 //#endregion
+
+
+

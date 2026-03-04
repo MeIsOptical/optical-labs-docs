@@ -108,13 +108,13 @@
 
             <div class="table-wrapper">
                 <table>
-                    <thread>
+                    <thead>
                         <tr>
                             <th>Field Name</th>
                             <th>Type</th>
                             <th>Value</th>
                         </tr>
-                    </thread>
+                    </thead>
                     <tbody>
                         <tr>
                             <td><span class="inline-code">text</span></td>
@@ -159,12 +159,12 @@
                             remaining_credits: 12345
                         },
                         result: {
-                            "censored_text": "Hello world!",
-                            "censored_count": 0,
-                            "strictness": 2,
-                            "mask_style": "full",
-                            "blacklist": [],
-                            "whitelist": []
+                            censored_text: "Hello world!",
+                            censored_count: 0,
+                            strictness: 2,
+                            mask_style: "full",
+                            blacklist: [],
+                            whitelist: []
                         }
                     },
                     documentation: "https://docs.optical-labs.ca/prism/"
@@ -205,18 +205,18 @@
             <p>Assuming that the word "bad" is a profanity:</p>
             <script>
                 addJSONCodeBlock('Request Body', {
-                    "text": "This sentence contains a bad word."
+                    text: "This sentence contains a bad word."
                 });
             </script>
             <p>The response includes the full configuration used for the request, including default values for any undefined parameters:</p>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "censored_text": "This sentence contains a *** word.",
-                    "censored_count": 1,
-                    "strictness": 2,
-                    "mask_style": "full",
-                    "blacklist": [],
-                    "whitelist": []
+                    censored_text: "This sentence contains a *** word.",
+                    censored_count: 1,
+                    strictness: 2,
+                    mask_style: "full",
+                    blacklist: [],
+                    whitelist: []
                 });
             </script>
             
@@ -226,19 +226,19 @@
             <p>Assuming that the word "bad" is a <span style="text-decoration: underline;">level 2</span> profanity:</p>
             <script>
                 addJSONCodeBlock('Request Body', {
-                    "text": "This sentence contains a bad word.",
+                    text: "This sentence contains a bad word.",
                     strictness: 1
                 });
             </script>
             <p>Since the request strictness (1) is lower than the word's profanity level (2), the text remains uncensored:</p>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "censored_text": "This sentence contains a bad word.",
-                    "censored_count": 0,
-                    "strictness": 1,
-                    "mask_style": "full",
-                    "blacklist": [],
-                    "whitelist": []
+                    censored_text: "This sentence contains a bad word.",
+                    censored_count: 0,
+                    strictness: 1,
+                    mask_style: "full",
+                    blacklist: [],
+                    whitelist: []
                 });
             </script>
             
@@ -248,19 +248,19 @@
             <p>Assuming that the word "bad" is a profanity:</p>
             <script>
                 addJSONCodeBlock('Request Body', {
-                    "text": "This sentence contains a bad word.",
-                    "mask_style": "comic"
+                    text: "This sentence contains a bad word.",
+                    mask_style: "comic"
                 });
             </script>
             <p>Profanity is now censored differently:</p>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "censored_text": "This sentence contains a $#! word.",
-                    "censored_count": 1,
-                    "strictness": 2,
-                    "mask_style": "comic",
-                    "blacklist": [],
-                    "whitelist": []
+                    censored_text: "This sentence contains a $#! word.",
+                    censored_count: 1,
+                    strictness: 2,
+                    mask_style: "comic",
+                    blacklist: [],
+                    whitelist: []
                 });
             </script>
             
@@ -270,20 +270,20 @@
             <p>Assuming that the word "bad" is a profanity and "banana" isn't:</p>
             <script>
                 addJSONCodeBlock('Request Body', {
-                    "text": "I'm a bad banana!",
-                    "blacklist": ["banana"],
-                    "whitelist": ["bad"]
+                    text: "I'm a bad banana!",
+                    blacklist: ["banana"],
+                    whitelist: ["bad"]
                 });
             </script>
             <p>Blacklist forbids "banana" and whitelist allows "bad":</p>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "censored_text": "I'm a bad ******!",
-                    "censored_count": 1,
-                    "strictness": 2,
-                    "mask_style": "full",
-                    "blacklist": ["banana"],
-                    "whitelist": ["bad"]
+                    censored_text: "I'm a bad ******!",
+                    censored_count: 1,
+                    strictness: 2,
+                    mask_style: "full",
+                    blacklist: ["banana"],
+                    whitelist: ["bad"]
                 });
             </script>
             
@@ -293,21 +293,21 @@
             <p>Of course, any combination of fields can be used in the same request:</p>
             <script>
                 addJSONCodeBlock('Request Body', {
-                    "text": "This sentence contains a bad word.",
-                    "strictness": 3,
-                    "mask_style": "vowels",
-                    "blacklist": ["sentence", "word"],
-                    "whitelist": ["bad"]
+                    text: "This sentence contains a bad word.",
+                    strictness: 3,
+                    mask_style: "vowels",
+                    blacklist: ["sentence", "word"],
+                    whitelist: ["bad"]
                 });
             </script>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "censored_text": "This s*nt*nc* contains a bad w*rd.",
-                    "censored_count": 2,
-                    "strictness": 3,
-                    "mask_style": "vowels",
-                    "blacklist": ["sentence", "word"],
-                    "whitelist": ["bad"]
+                    censored_text: "This s*nt*nc* contains a bad w*rd.",
+                    censored_count: 2,
+                    strictness: 3,
+                    mask_style: "vowels",
+                    blacklist: ["sentence", "word"],
+                    whitelist: ["bad"]
                 });
             </script>
 

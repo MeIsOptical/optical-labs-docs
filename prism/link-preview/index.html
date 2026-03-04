@@ -104,13 +104,13 @@
 
             <div class="table-wrapper">
                 <table>
-                    <thread>
+                    <thead>
                         <tr>
                             <th>Field Name</th>
                             <th>Type</th>
                             <th>Value</th>
                         </tr>
-                    </thread>
+                    </thead>
                     <tbody>
                         <tr>
                             <td><span class="inline-code">url</span></td>
@@ -135,12 +135,12 @@
                             remaining_credits: 12345
                         },
                         result: {
-                            "url": "https://www.youtube.com/",
-                            "domain": "www.youtube.com",
-                            "title": "Youtube",
-                            "description": "Enjoy the videos and music that you love, upload original content and share it all with friends, family and the world on YouTube.",
-                            "image": "https://www.youtube.com/img/desktop/yt_1200.png",
-                            "icon": "https://www.youtube.com/s/desktop/2a7df5b3/img/favicon.ico"
+                            url: "https://www.youtube.com/",
+                            domain: "www.youtube.com",
+                            title: "Youtube",
+                            description: "Enjoy the videos and music that you love, upload original content and share it all with friends, family and the world on YouTube.",
+                            image: "https://www.youtube.com/img/desktop/yt_1200.png",
+                            icon: "https://www.youtube.com/s/desktop/2a7df5b3/img/favicon.ico"
                         }
                     },
                     documentation: "https://docs.optical-labs.ca/prism/"
@@ -180,12 +180,12 @@
             </script>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "url": "https://discord.com/",
-                    "domain": "discord.com",
-                    "title": "Discord - Group Chat That’s All Fun & Games",
-                    "description": "Discord is great for playing games and chilling with friends, or even building a worldwide community. Customize your own space to talk, play, and hang out.",
-                    "image": "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/665643dd8c7ac752237b5cef_Discord-OG-1200x630.jpg",
-                    "icon": "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6266bc493fb42d4e27bb8393_847541504914fd33810e70a0ea73177e.ico"
+                    url: "https://discord.com/",
+                    domain: "discord.com",
+                    title: "Discord - Group Chat That’s All Fun & Games",
+                    description: "Discord is great for playing games and chilling with friends, or even building a worldwide community. Customize your own space to talk, play, and hang out.",
+                    image: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/665643dd8c7ac752237b5cef_Discord-OG-1200x630.jpg",
+                    icon: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6266bc493fb42d4e27bb8393_847541504914fd33810e70a0ea73177e.ico"
                 });
             </script>
 
@@ -194,18 +194,18 @@
             <h2 id="null-example">Request With Null Fields</h2>
             <script>
                 addJSONCodeBlock('Request Body', {
-                    "url": "https://example.com"
+                    url: "https://example.com"
                 });
             </script>
             <p>Fields are not guaranteed to return a value. Some URLs just won't have the requested content:</p>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "url": "https://example.com/",
-                    "domain": "example.com",
-                    "title": "Example Domain",
-                    "description": null,
-                    "image": null,
-                    "icon": "https://example.com/favicon.ico"
+                    url: "https://example.com/",
+                    domain: "example.com",
+                    title: "Example Domain",
+                    description: null,
+                    image: null,
+                    icon: "https://example.com/favicon.ico"
                 });
             </script>
 
@@ -214,18 +214,18 @@
             <h2 id="redirected-example">Redirected Request</h2>
             <script>
                 addJSONCodeBlock('Request Body', {
-                    "url": "https://google.com/design"
+                    url: "https://google.com/design"
                 });
             </script>
             <p>If the provided URL initiates a redirect, the endpoint will automatically follow it. As a result, the final URL might not match the initial input:</p>
             <script>
                 addJSONCodeBlock('Unwrapped Result', {
-                    "url": "https://design.google/",
-                    "domain": "design.google",
-                    "title": "Google Design - Discover the people and stories behind the products",
-                    "description": "Design resources and inspiration from Google — including the Material Design system, Google Fonts, and the people and processes behind the products.",
-                    "image": "https://storage.googleapis.com/gd-prod/images/0100ffa2-71ec-4371-a035-f612253f3fa3.0db06b6b53a87fb0.png",
-                    "icon": "https://design.google/apple-touch-icon.png"
+                    url: "https://design.google/",
+                    domain: "design.google",
+                    title: "Google Design - Discover the people and stories behind the products",
+                    description: "Design resources and inspiration from Google — including the Material Design system, Google Fonts, and the people and processes behind the products.",
+                    image: "https://storage.googleapis.com/gd-prod/images/0100ffa2-71ec-4371-a035-f612253f3fa3.0db06b6b53a87fb0.png",
+                    icon: "https://design.google/apple-touch-icon.png"
                 });
             </script>
 

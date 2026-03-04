@@ -54,6 +54,7 @@
             <div class="contentTableCategory">
                 <a href="#endpoints">Endpoints</a>
                 <a href="#profanity-censor">Profanity Censor</a>
+                <a href="#ai-moderation">AI Moderation</a>
                 <a href="#link-preview">Link Preview</a>
             </div>
 
@@ -176,14 +177,14 @@
 
             <div class="table-wrapper">
                 <table>
-                    <thread>
+                    <thead>
                         <tr>
                             <th>Level</th>
                             <th>Limit</th>
                             <th>Identified By</th>
                             <th>Error Response</th>
                         </tr>
-                    </thread>
+                    </thead>
                     <tbody>
                         <tr>
                             <td>User</td>
@@ -229,14 +230,14 @@
             <h3>Credit Packs:</h3>
             <div class="table-wrapper">
                 <table>
-                    <thread>
+                    <thead>
                         <tr>
                             <th>Pack Name</th>
                             <th>Credits</th>
                             <th>Price (USD)</th>
                             <th>Cost per Credit</th>
                         </tr>
-                    </thread>
+                    </thead>
                     <tbody>
                         <tr>
                             <td>Tester</td>
@@ -283,18 +284,23 @@
             <h3>Costs of endpoints:</h3>
             <div class="table-wrapper">
                 <table>
-                    <thread>
+                    <thead>
                         <tr>
                             <th>Endpoint</th>
                             <th>Cost</th>
                             <th>Description</th>
                         </tr>
-                    </thread>
+                    </thead>
                     <tbody>
                         <tr>
                             <td>Profanity Censor</td>
                             <td>1 credit</td>
                             <td>Remove bad words from a text.</td>
+                        </tr>
+                        <tr>
+                            <td>AI Moderator</td>
+                            <td>10 - 12 credits</td>
+                            <td>Detect harmful content with context-aware AI.</td>
                         </tr>
                         <tr>
                             <td>Link Preview</td>
@@ -317,6 +323,13 @@
             <h2 id="profanity-censor">Profanity Censor</h2>
             <p>The profanity censor endpoint lets you input a text, and then returns a censored version of the original text. Multiple optional personalization options are available like a strictness level, censor style, a custom list of blacklisted words, and a custom list of whitelisted words.</p>
             <a href="./profanity-censor/" class="sub-page-btn">See documentation</a>
+
+            <br>
+            <br>
+
+            <h2 id="ai-moderation">AI Moderation</h2>
+            <p>Leverage AI to detect unsafe content with deep context awareness. This endpoint assigns safety scores across 8 categories while adapting to the provided context. It can distinguish playful texts from genuine threats, ensuring accurate moderation for any environment.</p>
+            <a href="./ai-moderation/" class="sub-page-btn">See documentation</a>
 
             <br>
             <br>

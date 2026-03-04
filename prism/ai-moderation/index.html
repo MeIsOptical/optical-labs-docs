@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="/styles/defaults.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+
+    <title>Prism Docs | Optical Labs</title>
+
+    <meta name="description" content="Optical Labs Documentation - Prism API">
+    <link rel="icon" href="/images/prism/prism logo.webp" type="image/x-icon">
+</head>
+
+
+
+<body class="stripedBg docs-layout">
+
+    <script src="/js/codeBlocks.js"></script>
+    
+    <header>
+
+        <button id="mobileMenuToggle">
+            <span>Table of Contents</span>
+            <span id="menuArrow">▼</span>
+        </button>
+
+        <div id="contentTable">
+
+            <h1 id="contentTableTitle">Content Table</h1>
+
+            <div class="contentTableCategory">
+                <a href="#usage">Usage</a>
+                <a href="#description">Description</a>
+                <a href="#method-path">Method & Path</a>
+                <a href="#body-fields">Body Fields</a>
+                <a href="#valid-response">Valid Response</a>
+                <a href="#models">Models</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="#interactive-preview">Interactive Preview</a>
+            </div>
+            
+            <div class="contentTableCategory">
+                <a href="#examples">Examples</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="/prism/#ai-moderation">Go Back</a>
+            </div>
+
+        </div>
+    </header>
+
+
+
+
+    <main id="docs-main">
+
+        <div id="docs-title-div">
+            <h1>Prism Endpoint:</h1>
+            <h1>AI Moderator</h1>
+        </div>
+
+        <hr class="default-hr">
+
+        <section class="doc-section" id="usage">
+            <h1>Usage</h1>
+
+            <h2 id="description">Description</h2>
+            <p>Leverage AI to detect unsafe content with deep context awareness. This endpoint assigns safety scores across 8 categories while adapting to the provided context. It can distinguish playful texts from genuine threats, ensuring accurate moderation for any environment.</p>
+
+            <br>
+
+            <h2 id="method-path">Method & Path</h2>
+            <p>Use <span class="inline-code">https://prism.optical-labs.ca/text/ai-moderation</span> to access this endpoint. The method must be <span class="inline-code">POST</span> and the header should contain your secret API key, as shown below:</p>
+
+            <script>
+                addCodeBlock("Example", "bash",
+`curl -X POST https://prism.optical-labs.ca/text/ai-moderation \\
+    -H "Authorization: Bearer <YOUR_SECRET_API_KEY>" \\
+    -H "Content-Type: application/json" \\
+    -d '{
+        "text": "Hello world!",
+        "context": "Example from the official Prism documentation"
+    }'`);
+            </script>
+
+            <br>
+
+            <h2 id="body-fields">Body Fields</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Type</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="inline-code">text</span></td>
+                            <td>String (required)</td>
+                            <td>Text with a length between 1 and 5000 characters</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">context</span></td>
+                            <td>String</td>
+                            <td>Text with a length between 0 and 200 characters</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">model</span></td>
+                            <td>String</td>
+                            <td>ID of the model used. One of: <span class="inline-code">"prism-guard-flash"</span> <span class="inline-code">"prism-guard-pro"</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+
+            <h2 id="valid-response">Valid Response</h2>
+            <script>
+                addJSONCodeBlock('Successful Response Example', {
+                    success: true,
+                    message: "Success",
+                    execution_time: 1179,
+                    data: {
+                        meta: {
+                            used_credits: 10,
+                            remaining_credits: 12345
+                        },
+                        result: {
+                            text: "Hello world!",
+                            context: "Example from the official Prism documentation",
+                            model: "prism-guard-flash",
+                            moderation: {
+                                scores:
+                                    { illegal: 0, violence: 0, hate_speech: 0, harassment: 0, sexual: 0, spam: 0, privacy: 0, profanity: 0 },
+                                reason: "Harmless greeting in an official documentation context"
+                            }
+                        }
+                    },
+                    documentation: "https://docs.optical-labs.ca/prism/"
+                });
+            </script>
+            
+
+
+            <br>
+
+            <h2 id="models">Models</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Cost</th>
+                            <th>Execution Time*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="inline-code">prism-guard-flash</span></td>
+                            <td>Fast, efficient, reliable.</td>
+                            <td>10 credits</td>
+                            <td>0.5 - 3 seconds</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">prism-guard-pro</span></td>
+                            <td>Deeper reasoning, higher intelligence.</td>
+                            <td>12 credits</td>
+                            <td>2 - 10 seconds</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>*Execution times vary based on input length. Expect higher latency for larger requests.</p>
+
+
+        </section>
+
+
+        <hr class="default-hr extra-hr">
+
+
+        <section class="doc-section" id="interactive-preview">
+            <h1>Interactive Preview</h1>
+            <p>Because of the high-compute nature of this endpoint, the interactive preview is not available.</p>
+        </section>
+
+
+        <hr class="default-hr extra-hr">
+
+
+        <section class="doc-section" id="examples">
+            <h1>Examples</h1>
+
+            <p>No examples yet.</p>
+
+        </section>
+
+    </main>
+
+
+
+    <script src="/js/main.js"></script>
+
+</body>
+
+
+</html>

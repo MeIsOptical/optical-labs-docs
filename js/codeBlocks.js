@@ -222,7 +222,9 @@ function addInteractivePreview(pEndpoint, pFields) {
                 if (element) {                
                     let rawValue = element.value; 
                     if (rawValue.trim() !== "" && !isNaN(Number(rawValue))) rawValue = Number(rawValue);
-                    requestBody[field.key] = rawValue;
+                    if (rawValue) {
+                        requestBody[field.key] = rawValue;
+                    }
                 }
             }
         });
@@ -327,7 +329,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (rawValue.trim() !== "" && !isNaN(Number(rawValue))) {
                     rawValue = Number(rawValue);
                 }
-                requestBody[element.dataset.key] = element.value;
+                
+                if (rawValue) {
+                    requestBody[element.dataset.key] = element.value;
+                }
             });
 
 
@@ -363,8 +368,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
 
+
+                // image preview for svg endpoints
+                let visualPreviewHtml = "";
+                if (data?.data?.result?.svg) {
+                    visualPreviewHtml = `
+                        <div class="code-header" style="border-top: 1px solid var(--border-color);">
+                            <span>Visual Preview</span>
+                            <span class="code-lang">SVG</span>
+                        </div>
+                        <div style="padding: 2rem">
+                            <div>
+                                ${data.data.result.svg}
+                            </div>
+                        </div>
+                    `;
+                }
+
+
                 // display formatted output
                 previewOutput.innerHTML = `
+                    ${visualPreviewHtml}
                     <div class="code-header">
                         <span>Live Response</span>
                         <span class="code-lang">JSON</span>

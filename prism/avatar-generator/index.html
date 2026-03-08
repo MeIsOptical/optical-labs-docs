@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="/styles/defaults.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+
+    <title>Avatar Generator API | Generate Unique Profile Icons - Prism</title>
+
+    <meta name="description" content="Generate unique SVG profile icons from any text seed. Easily customize character shapes, background patterns, border styles, and color palettes to perfectly match your design. Try it for free.">
+    <link rel="icon" href="/images/prism/prism logo.webp" type="image/x-icon">
+</head>
+
+
+
+<body class="stripedBg docs-layout">
+
+    <script src="/js/codeBlocks.js"></script>
+    
+    <header>
+
+        <button id="mobileMenuToggle">
+            <span>Table of Contents</span>
+            <span id="menuArrow">▼</span>
+        </button>
+
+        <div id="contentTable">
+
+            <h1 id="contentTableTitle">Content Table</h1>
+
+            <div class="contentTableCategory">
+                <a href="#usage">Usage</a>
+                <a href="#description">Description</a>
+                <a href="#method-path">Method & Path</a>
+                <a href="#body-fields">Body Fields</a>
+                <a href="#valid-response">Valid Response</a>
+                <a href="#palettes">Palettes</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="#interactive-preview">Interactive Preview</a>
+                <a href="#preview-form">Form</a>
+                <a href="#live-response">Response</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="#examples">Examples</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="/prism/#avatar-generator">Go Back</a>
+            </div>
+
+        </div>
+    </header>
+
+
+
+
+    <main id="docs-main">
+
+        <div id="docs-title-div">
+            <h1>Prism Endpoint:</h1>
+            <h1>Avatar Generator</h1>
+        </div>
+
+        <hr class="default-hr">
+
+        <section class="doc-section" id="usage">
+            <h1>Usage</h1>
+
+            <h2 id="description">Description</h2>
+            <p>Generate unique SVG profile icons from any text seed. Easily customize character shapes, background patterns, border styles, and color palettes to perfectly match your design.</p>
+
+            <br>
+
+            <h2 id="method-path">Method & Path</h2>
+            <p>Use <span class="inline-code">https://prism.optical-labs.ca/image/avatar-generator</span> to access this endpoint. The method must be <span class="inline-code">POST</span> and the header should contain your secret API key, as shown below:</p>
+
+            <script>
+                addCodeBlock("Example", "bash",
+`curl -X POST https://prism.optical-labs.ca/image/avatar-generator \\
+    -H "Authorization: Bearer <YOUR_SECRET_API_KEY>" \\
+    -H "Content-Type: application/json" \\
+    -d '{
+        "seed": "Optical Labs",
+    }'`);
+            </script>
+
+            <br>
+
+            <h2 id="body-fields">Body Fields</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="inline-code">seed</span></td>
+                            <td>String (required)</td>
+                            <td>Any string between 1 and 255 characters</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">avatar_shape</span></td>
+                            <td>String (optional)</td>
+                            <td>One of: <span class="inline-code">"curved"</span> <span class="inline-code">"square"</span> <span class="inline-code">"diamond"</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">bg_pattern</span></td>
+                            <td>String (optional)</td>
+                            <td>One of: <span class="inline-code">"solid"</span> <span class="inline-code">"layers"</span> <span class="inline-code">"dots"</span> <span class="inline-code">"stripes"</span> <span class="inline-code">"grid"</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">palette</span></td>
+                            <td>String (optional)</td>
+                            <td>See all 25 options <a href="#palettes">here</a>.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">color_bg_start</span></td>
+                            <td>Hex color code (optional)</td>
+                            <td>Any color in the form <span class="inline-code">"#FF06B5"</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">color_bg_end</span></td>
+                            <td>Hex color code (optional)</td>
+                            <td>Any color in the form <span class="inline-code">"#FF06B5"</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">color_body_start</span></td>
+                            <td>Hex color code (optional)</td>
+                            <td>Any color in the form <span class="inline-code">"#FF06B5"</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">color_body_end</span></td>
+                            <td>Hex color code (optional)</td>
+                            <td>Any color in the form <span class="inline-code">"#FF06B5"</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">color_head</span></td>
+                            <td>Hex color code (optional)</td>
+                            <td>Any color in the form <span class="inline-code">"#FF06B5"</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">border_radius</span></td>
+                            <td>Integer (optional)</td>
+                            <td>A number from 0 (square) to 50 (circle)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">border_width</span></td>
+                            <td>Integer (optional)</td>
+                            <td>Any number from 0 to around 12</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+
+            <h2 id="valid-response">Valid Response</h2>
+            <p>Each successful request to this endpoint costs <a href="../#billing">1 credit</a>. Your usage and remaining credits are always returned in the meta object of the response.</p>
+            <script>
+                addJSONCodeBlock('Successful Response Example', {
+                    success: true,
+                    message: "Success",
+                    execution_time: 179,
+                    data: {
+                        meta: {
+                            used_credits: 1,
+                            remaining_credits: 12345
+                        },
+                        result: {
+                            seed: "optical labs", avatar_shape: "curved", bg_pattern: "stripes", palette: "yellow_blue", color_bg_start: "#FAD961", color_bg_end: "#f88745", color_body_start: "#7579FF", color_body_end: "#B224EF", color_head: "#7579FF", border_radius: 50, border_width: 12, svg: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"100\" height=\"100\">(returned svg would be here)</svg>"
+                        }
+                    },
+                    documentation: "https://docs.optical-labs.ca/prism/"
+                });
+            </script>
+
+
+            <br>
+
+            <h2 id="palettes">Palettes</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Colors</th>
+                        </tr>
+                    </thead>
+                    <tbody id="color-palette-table-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <script>
+                const PALETTES = {
+                    // format: [background start, background end, body start, body end, head & details]
+
+                    // dark
+                    "dark_blue_red": ["#1A1A2E", "#16213E", "#ff4e6c", "#a81336", "#F9A03F"],
+                    "dark_blue_pink": ["#0F2027", "#203A43", "#f558d3", "#f13b7b", "#f558d3"],
+                    "dark_purple_green": ["#23074D", "#4B1D52", "#38EF7D", "#18c0b2", "#00FF87"],
+                    "black_cyan": ["#261f1f", "#1A1A1A", "#52bdd6", "#4377a2", "#00F5D4"],
+                    "black_hot_pink": ["#1A0024", "#000000", "#FF007F", "#ca28b7", "#FF66B2"],
+                    "black_yellow": ["#000000", "#1C1C1C", "#F2C94C", "#f2af4a", "#FFE066"],
+                    "black_green": ["#111111", "#000000", "#11998E", "#155941", "#00FF87"],
+                    "black_magenta": ["#000000", "#2B2B2B", "#a245b2", "#ef77c1", "#ff9aff"],
+                    "black_red": ["#121212", "#2B2B2B", "#870022", "#701d04", "#a80022"],
+
+                    // light/neutral
+                    "light_grey_purple": ["#ECE9E6", "#E1DFDD", "#8E2DE2", "#4A00E0", "#5400b5"],
+                    "light_blue_dark_blue": ["#F2FCFE", "#D5EEF5", "#1C92D2", "#0F5E8C", "#094063"],
+                    "dark_blue_light_blue": ["#020024", "#090979", "#00D4FF", "#0093E9", "#80E5FF"],
+                    "slate_blue_cyan": ["#141E30", "#243B55", "#00B4DB", "#0083B0", "#00FFFF"],
+                    "beige_brown": ["#EADDD7", "#D5C5B8", "#5D4037", "#3E2723", "#271611"],
+                    "pale_pink_purple": ["#F3E7E9", "#E3EEFF", "#9D50BB", "#6E48AA", "#5B247A"],
+
+                    // warm/earthy
+                    "orange_red": ["#FFB75E", "#ED8F03", "#8E0E00", "#4A0700", "#8E0E00"],
+                    "dark_teal_yellow": ["#134E5E", "#0B2E38", "#F9D423", "#e68a00", "#FFED4A"],
+                    "pale_yellow_plum": ["#F0E1B9", "#E3C565", "#4B1248", "#2E0B2D", "#6A1A66"],
+                    "purple_orange": ["#DA22FF", "#9733EE", "#F09819", "#FF512F", "#F09819"],
+
+                    // pastel/bright
+                    "pink_red": ["#FFF0F5", "#FAD0C4", "#FF0844", "#FFB199", "#C10037"],
+                    "pale_purple_pink": ["#E0C3FC", "#8EC5FC", "#FF9A9E", "#ffc7ed", "#FF8691"],
+                    "light_green_red": ["#D4FC79", "#96E6A1", "#ff5781", "#FFB199", "#ff5781"],
+                    "pale_yellow_red": ["#F1F2B5", "#D8D992", "#ED213A", "#93291E", "#FF4B2B"],
+                    "light_grey_hot_pink": ["#E2E2E2", "#C9D6FF", "#FFB6C1", "#FF69B4", "#FF1493"],
+                    "yellow_blue": ["#FAD961", "#f88745", "#7579FF", "#B224EF", "#7579FF"]
+                };
+
+                const table = document.getElementById("color-palette-table-body");
+                const paletteNames = Object.keys(PALETTES);
+                for (const paletteName of paletteNames) {
+                    const colors = PALETTES[paletteName];
+
+                    let colorSquares = "";
+                    for (const hex of colors) {
+                        colorSquares += `
+                            <span style="
+                                display: inline-block; 
+                                width: 32px; 
+                                height: 32px; 
+                                background-color: ${hex}; 
+                                border-radius: 5px; 
+                                margin-right: 6px;
+                                border: 3px solid rgba(0,0,0,0.3);
+                            "></span>
+                        `;
+                    }
+
+                    table.innerHTML += `<tr><td><span class="inline-code">${paletteName}</span></td><td>${colorSquares}</td></tr>`;
+                }
+            </script>
+
+        </section>
+
+
+        <hr class="default-hr extra-hr">
+
+
+        <section class="doc-section" id="interactive-preview">
+            <h1>Interactive Preview</h1>
+            <p>Send a real request to the endpoint for free, directly from your browser!</p>
+
+            <script>
+                addInteractivePreview("image/avatar-generator", [
+                    { type: "text", label: `Seed<span class="mandatory">*</span>`, id: "avatar-generator-seed", key: "seed", placeholder: "Type a seed", required: true},
+                    { type: "dropdown", label: "Avatar shape", id: "avatar-generator-avatar_shape", key: "avatar_shape", options: [{ label: "Random", value: "", selected: true }, { label: "Curved", value: "curved" }, { label: "Square", value: "square" }, { label: "Diamond", value: "diamond" }]},
+                    { type: "dropdown", label: "Background pattern", id: "avatar-generator-background-pattern", key: "bg_pattern", options: [{ label: "Random", value: "", selected: true }, { label: "Solid", value: "solid" }, { label: "Layers", value: "layers" }, { label: "Dots", value: "dots" }, { label: "Stripes", value: "stripes" }, { label: "Grid", value: "grid" }]},
+                    { type: "text", label: `Palette`, id: "avatar-generator-palette", key: "palette", placeholder: "Enter a valid palette"},
+                    { type: "text", label: `Background color start`, id: "avatar-generator-color-bg-start", key: "color_bg_start", placeholder: "Enter a valid hex code"},
+                    { type: "text", label: `Background color end`, id: "avatar-generator-color-bg-end", key: "color_bg_end", placeholder: "Enter a valid hex code"},
+                    { type: "text", label: `Body color start`, id: "avatar-generator-color-body-start", key: "color_body_start", placeholder: "Enter a valid hex code"},
+                    { type: "text", label: `Body color end`, id: "avatar-generator-color-body-end", key: "color_body_end", placeholder: "Enter a valid hex code"},
+                    { type: "text", label: `Head & details color`, id: "avatar-generator-color-head", key: "color_head", placeholder: "Enter a valid hex code"},
+                    { type: "text", label: `Border radius`, id: "avatar-generator-border-radius", key: "border_radius", placeholder: "Enter a value from 0 (square) to 50 (circle)"},
+                    { type: "text", label: `Border width`, id: "avatar-generator-border-width", key: "border_width", placeholder: "Enter a value from 0 to 12"},
+                ]);
+            </script>
+
+        </section>
+
+
+        <hr class="default-hr extra-hr">
+
+
+        <section class="doc-section" id="examples">
+            <h1>Examples</h1>
+
+            <p>No examples yet.</p>
+
+        </section>
+
+    </main>
+
+
+
+    <script src="/js/main.js"></script>
+
+</body>
+
+
+</html>

@@ -112,7 +112,7 @@
                         <tr>
                             <th>Field Name</th>
                             <th>Type</th>
-                            <th>Value</th>
+                            <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -124,7 +124,7 @@
                         <tr>
                             <td><span class="inline-code">strictness</span></td>
                             <td>Integer (optional)</td>
-                            <td>From 1 to 3</td>
+                            <td>Level of strictness from 1 to 3</td>
                         </tr>
                         <tr>
                             <td><span class="inline-code">mask_style</span></td>
@@ -187,7 +187,7 @@
                 addInteractivePreview("text/profanity", [
                     { type: "text", label: `Text<span class="mandatory">*</span>`, id: "profanity-text", key: "text", placeholder: "Type a sentence with a bad word", required: true},
                     { type: "dropdown", label: "Strictness", id: "profanity-strictness", key: "strictness", options: [{ label: "1 (Low)", value: 1 }, { label: "2 (Medium)", value: 2, selected: true }, { label: "3 (High)", value: 3 }]},
-                    { type: "dropdown", label: "Mask Style", id: "profanity-mask", key: "mask_style", options: [{ label: "Full", value: "full", selected: true }, { label: "Partial", value: "partial" }, { label: "Vowels", value: "vowels" }, { label: "Redact", value: "redact" }, { label: "Comic", value: "comic" }]},
+                    { type: "dropdown", label: "Mask style", id: "profanity-mask", key: "mask_style", options: [{ label: "Full", value: "full", selected: true }, { label: "Partial", value: "partial" }, { label: "Vowels", value: "vowels" }, { label: "Redact", value: "redact" }, { label: "Comic", value: "comic" }]},
                     { type: "array", label: "Blacklist", id: "profanity-blacklist", key: "blacklist" },
                     { type: "array", label: "Whitelist", id: "profanity-whitelist", key: "whitelist" }
                 ]);

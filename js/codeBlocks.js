@@ -14,7 +14,7 @@ function formatJSON(obj, indent = 0) {
     };
 
     if (obj === null) return '<span class="null">null</span>';
-    if (typeof obj === 'number') return `<span class="number">${obj}</span>`;
+    if (!isNaN(Number(obj))) return `<span class="number">${Number(obj)}</span>`;
     if (typeof obj === 'boolean') return `<span class="boolean">${obj}</span>`;
     
     if (typeof obj === 'string') {
@@ -222,7 +222,7 @@ function addInteractivePreview(pEndpoint, pFields) {
                 if (element) {                
                     let rawValue = element.value; 
                     if (rawValue.trim() !== "" && !isNaN(Number(rawValue))) rawValue = Number(rawValue);
-                    if (rawValue) {
+                    if (rawValue || rawValue === 0) {
                         requestBody[field.key] = rawValue;
                     }
                 }
@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     rawValue = Number(rawValue);
                 }
                 
-                if (rawValue) {
+                if (rawValue || rawValue === 0) {
                     requestBody[element.dataset.key] = element.value;
                 }
             });
@@ -361,7 +361,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`https://prism.optical-labs.ca/${endpoint}`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        "Authorization": "Bearer sk_prism_cb8c1485827c4a68b8386a0a48dc67a7"
                     },
                     body: JSON.stringify(requestBody)
                 });

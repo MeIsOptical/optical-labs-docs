@@ -361,8 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`https://prism.optical-labs.ca/${endpoint}`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        "Authorization": "Bearer sk_prism_cb8c1485827c4a68b8386a0a48dc67a7"
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(requestBody)
                 });

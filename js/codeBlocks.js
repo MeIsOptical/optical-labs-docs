@@ -173,7 +173,7 @@ function addInteractivePreview(pEndpoint, pFields) {
 
                 <button type="submit" id="preview-btn">Send Request</button>
 
-                <p id="live-response"><span style="text-decoration: underline; font-style: italic;">Note:</span> Because this is a free preview, we are enforcing a strict maximum of 7 requests per minute.</p>
+                <p id="live-response"><span style="text-decoration: underline; font-style: italic;">Note:</span> Because this is a free preview, we are enforcing a strict maximum of 5 requests per minute.</p>
 
             </form>
 

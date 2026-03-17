@@ -190,7 +190,7 @@
                         <tr>
                             <td>User</td>
                             <td>90 Requests/minute</td>
-                            <td><span class="inline-code">X-Forwarded-For</span> Header</td>
+                            <td><span class="inline-code">X-Forwarded-For</span> Header / API Key Used</td>
                             <td><span class="inline-code">429 (JSON)</span></td>
                         </tr>
                         <tr>
@@ -210,9 +210,9 @@
             </div>
 
             <h3>Forwarding User IPs</h3>
-            <p>If you are calling Prism from your backend server, our API sees your server's IP address as a simple user by default. This means all your customers share the 120 reqs/min limit, which you might hit quickly depending on your traffic.</p>
+            <p>If you are calling Prism from your backend server, our API sees your server's IP address as a simple user by default. This means all your customers share the 90 reqs/min limit, which you might hit quickly depending on your traffic.</p>
 
-            <p>To avoid this, you should forward your user's IP address in the headers. Prism checks for the <span class="inline-code">X-Forwarded-For</span> header to identify unique users. If provided, the 120 reqs/min limit applies to that specific IP, while your server falls under the much higher 1200 reqs/min limit.</p>
+            <p>To avoid this, you can forward your user's IP address in the headers. Prism checks for the <span class="inline-code">X-Forwarded-For</span> header to identify unique users. If provided, the 90 reqs/min limit applies to that specific IP, while your server falls under the much higher 900 reqs/min limit.</p>
 
             <p>Example header to pass individual user rate limits: <span class="inline-code">"X-Forwarded-For": "203.0.113.195"</span></p>
 

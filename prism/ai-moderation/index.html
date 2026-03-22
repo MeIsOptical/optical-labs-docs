@@ -48,10 +48,14 @@
 
             <div class="contentTableCategory">
                 <a href="#interactive-preview">Interactive Preview</a>
+                <a href="#interactive-preview">Not available</a>
             </div>
             
             <div class="contentTableCategory">
                 <a href="#examples">Examples</a>
+                <a href="#basic-example">Basic Request</a>
+                <a href="#context-example">Custom Context</a>
+                <a href="#pro-model-example">Pro Model</a>
             </div>
 
             <div class="contentTableCategory">
@@ -184,7 +188,7 @@
                             <td><span class="inline-code">prism-guard-pro</span></td>
                             <td>Deeper reasoning, higher intelligence.</td>
                             <td>12 credits</td>
-                            <td>2 - 10 seconds</td>
+                            <td>2 - 8 seconds</td>
                         </tr>
                     </tbody>
                 </table>
@@ -211,7 +215,98 @@
         <section class="doc-section" id="examples">
             <h1>Examples</h1>
 
-            <p>No examples yet.</p>
+            <h2 id="basic-example">Basic Request</h2>
+            <p>The simplest request you can make, using only the <span class="inline-code">text</span> field (not recommended):</p>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    text: "I just murdered that guy!"
+                });
+            </script>
+            <p>The response includes the full configuration used for the request, including default values for any undefined parameters:</p>
+            <script>
+                addJSONCodeBlock('Unwrapped Result', {
+                    text: "I just murdered that guy!",
+                    context: "",
+                    model: "prism-guard-flash",
+                    moderation: {
+                        scores: {
+                            illegal: 0,
+                            violence: 0.8,
+                            hate_speech: 0,
+                            harassment: 0,
+                            sexual: 0,
+                            spam: 0,
+                            privacy: 0,
+                            profanity: 0.4
+                        },
+                        reason: "Graphic violence and potential profanity in an unspecified context"
+                    }
+                });
+            </script>
+            
+            <br>
+
+            <h2 id="context-example">Custom Context</h2>
+            <p>Add <span class="inline-code">context</span> to help the AI understand the situation:</p>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    text: "I just murdered that guy!",
+                    context: "Messages in a multiplayer game"
+                });
+            </script>
+            <p>The response includes the full configuration used for the request, including default values for any undefined parameters:</p>
+            <script>
+                addJSONCodeBlock('Unwrapped Result', {
+                    text: "I just murdered that guy!",
+                    context: "Messages in a multiplayer game",
+                    model: "prism-guard-flash",
+                    moderation: {
+                        scores: {
+                            illegal: 0,
+                            violence: 0.2,
+                            hate_speech: 0,
+                            harassment: 0,
+                            sexual: 0,
+                            spam: 0,
+                            privacy: 0,
+                            profanity: 0.1
+                        },
+                        reason: "In-game violence expression in a multiplayer game context"
+                    }
+                });
+            </script>
+            
+            <br>
+
+            <h2 id="pro-model-example">Pro Model</h2>
+            <p>You can also use the <a href="#models">pro model</a> for greater intelligence at the cost of 2 extra credits:</p>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    text: "I just murdered that guy!",
+                    context: "Messages in a multiplayer game",
+                    model: "prism-guard-pro"
+                });
+            </script>
+            <script>
+                addJSONCodeBlock('Unwrapped Result', {
+                    text: "I just murdered that guy!",
+                    context: "Messages in a multiplayer game",
+                    model: "prism-guard-pro",
+                    moderation: {
+                        scores: {
+                            illegal: 0,
+                            violence: 0.1,
+                            hate_speech: 0,
+                            harassment: 0,
+                            sexual: 0,
+                            spam: 0,
+                            privacy: 0,
+                            profanity: 0
+                        },
+                        reason: "In-game action description in a gaming context"
+                    }
+                });
+            </script>
 
         </section>
 

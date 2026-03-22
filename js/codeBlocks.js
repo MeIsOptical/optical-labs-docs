@@ -14,12 +14,14 @@ function formatJSON(obj, indent = 0) {
     };
 
     if (obj === null) return '<span class="null">null</span>';
-    if (!isNaN(Number(obj))) return `<span class="number">${Number(obj)}</span>`;
+    
     if (typeof obj === 'boolean') return `<span class="boolean">${obj}</span>`;
     
     if (typeof obj === 'string') {
         return `<span class="string">${wrapString(obj)}</span>`;
     }
+
+    if (!isNaN(Number(obj))) return `<span class="number">${Number(obj)}</span>`;
     
     if (Array.isArray(obj)) {
         if (obj.length === 0) return '[]';

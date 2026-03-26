@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="/styles/defaults.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+
+    <title>AI Matching API | Semantic Text Search & Sort - Prism</title>
+
+    <meta name="description" content="A powerful semantic text matching API. Evaluate the relationship between a target text and multiple candidates with adjustable strictness levels and precise scoring using vector embeddings.">
+    <link rel="icon" href="/images/prism/prism logo.webp" type="image/x-icon">
+</head>
+
+
+
+<body class="stripedBg docs-layout">
+
+    <script src="/js/codeBlocks.js"></script>
+    
+    <header>
+
+        <button id="mobileMenuToggle">
+            <span>Table of Contents</span>
+            <span id="menuArrow">▼</span>
+        </button>
+
+        <div id="contentTable">
+
+            <h1 id="contentTableTitle">Content Table</h1>
+
+            <div class="contentTableCategory">
+                <a href="#usage">Usage</a>
+                <a href="#description">Description</a>
+                <a href="#method-path">Method & Path</a>
+                <a href="#body-fields">Body Fields</a>
+                <a href="#valid-response">Valid Response</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="#interactive-preview">Interactive Preview</a>
+                <a href="#interactive-preview">Not available</a>
+            </div>
+            
+            <div class="contentTableCategory">
+                <a href="#examples">Examples</a>
+                <a href="#basic-example">Basic Request</a>
+                <a href="#high-strictness-example">High Strictness</a>
+                <a href="#low-strictness-example">Low Strictness</a>
+            </div>
+
+            <div class="contentTableCategory">
+                <a href="/prism/#ai-matching">Go Back</a>
+            </div>
+
+        </div>
+    </header>
+
+
+
+
+    <main id="docs-main">
+
+        <div id="docs-title-div">
+            <h1>Prism Endpoint:</h1>
+            <h1>AI Matching</h1>
+        </div>
+
+        <hr class="default-hr">
+
+        <section class="doc-section" id="usage">
+            <h1>Usage</h1>
+
+            <h2 id="description">Description</h2>
+            <p>This endpoint evaluates the relationship between a target text and multiple candidates using vector embeddings, returning an ordered list with precise similarity scores. Perfect for intelligent search, categorization, or recommendation engines.</p>
+
+            <br>
+
+            <h2 id="method-path">Method & Path</h2>
+            <p>Use <span class="inline-code">https://prism.optical-labs.ca/text/ai-matching</span> to access this endpoint. The method must be <span class="inline-code">POST</span> and the header should contain your secret API key, as shown below:</p>
+
+            <script>
+                addCodeBlock("Example", "bash",
+`curl -X POST https://prism.optical-labs.ca/text/ai-matching \\
+    -H "Authorization: Bearer <YOUR_SECRET_API_KEY>" \\
+    -H "Content-Type: application/json" \\
+    -d '{
+        "target": "How can I update my payment information?",
+        "candidates": [
+            "How to reset my password",
+            "Contacting customer support",
+            "Where to find the API documentation",
+            "Managing payment methods",
+            "Sending a business inquiry"
+        ]
+    }'`);
+            </script>
+
+            <br>
+
+            <h2 id="body-fields">Body Fields</h2>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="inline-code">target</span></td>
+                            <td>String (required)</td>
+                            <td>Text with a length between 1 and 500 characters</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">candidates</span></td>
+                            <td>Array (required)</td>
+                            <td>1 to 500 strings, each with a length between 1 and 500 characters</td>
+                        </tr>
+                        <tr>
+                            <td><span class="inline-code">strictness</span></td>
+                            <td>Integer (optional)</td>
+                            <td>Level of matching strictness from 0 to 10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+
+            <h2 id="valid-response">Valid Response</h2>
+            <p>Each successful request to this endpoint costs <a href="../#billing">2 to 35 credits</a>, depending on the number of candidates. The price formula is <span class="inline-code">2 + ( candidates.length / 15 )</span>. Your usage and remaining credits are always returned in the meta object of the response.</p>
+            <script>
+                addJSONCodeBlock('Successful Response Example', {
+                    success: true,
+                    message: "Success",
+                    execution_time: 179,
+                    data: {
+                        meta: {
+                            used_credits: 2,
+                            remaining_credits: 12345
+                        },
+                        result: {
+                            target: "How can I update my payment information?",
+                            strictness: 5,
+                            candidates_count: 5,
+                            average_confidence: 0.249,
+                            ordered_results: [
+                                {
+                                    "candidate": "Managing payment methods",
+                                    "match_confidence": 0.685
+                                },
+                                {
+                                    "candidate": "Contacting customer support",
+                                    "match_confidence": 0.381
+                                },
+                                {
+                                    "candidate": "Sending a business inquiry",
+                                    "match_confidence": 0.096
+                                },
+                                {
+                                    "candidate": "How to reset my password",
+                                    "match_confidence": 0.06
+                                },
+                                {
+                                    "candidate": "Where to find the API documentation",
+                                    "match_confidence": 0.022
+                                }
+                            ]
+                        }
+                    },
+                    documentation: "https://docs.optical-labs.ca/prism/"
+                });
+            </script>
+
+        </section>
+
+
+        <hr class="default-hr extra-hr">
+
+
+        <section class="doc-section" id="interactive-preview">
+            <h1>Interactive Preview</h1>
+            <p>Because of the high-compute nature of this endpoint, the interactive preview is not available.</p>
+        </section>
+
+
+        <hr class="default-hr extra-hr">
+
+
+        <section class="doc-section" id="examples">
+            <h1>Examples</h1>
+
+            <h2 id="basic-example">Basic Request</h2>
+            <p>The simplest request you can make, using only the <span class="inline-code">target</span> and <span class="inline-code">candidates</span> fields:</p>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    target: "wireless noise cancelling headphones",
+                    candidates: [
+                        "Anker 6ft USB-C Charging Cable",
+                        "Bose QuietComfort Earbuds II, Wireless",
+                        "Sony WH-1000XM4 Wireless Noise Canceling Headphones",
+                        "Logitech Wired Gaming Headset with Mic"
+                    ]
+                });
+            </script>
+            <p>The endpoint reorders the candidates from highest to lowest match. The response also includes the full configuration used for the request, including default values for any undefined parameters:</p>
+            <script>
+                addJSONCodeBlock('Unwrapped Result', {
+                    target: "wireless noise cancelling headphones",
+                    strictness: 5,
+                    candidates_count: 4,
+                    average_confidence: 0.624,
+                    ordered_results: [
+                        {
+                            candidate: "Sony WH-1000XM4 Wireless Noise Canceling Headphones",
+                            match_confidence: 1
+                        },
+                        {
+                            candidate: "Bose QuietComfort Earbuds II, Wireless",
+                            match_confidence: 0.946
+                        },
+                        {
+                            candidate: "Logitech Wired Gaming Headset with Mic",
+                            match_confidence: 0.551
+                        },
+                        {
+                            candidate: "Anker 6ft USB-C Charging Cable",
+                            match_confidence: 0
+                        }
+                    ]
+                });
+            </script>
+
+            <br>
+
+            <h2 id="high-strictness-example">High Strictness</h2>
+            <p>Using a high strictness can be very practical when searching for near-perfect matches:</p>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    target: "wireless noise cancelling headphones",
+                    candidates: [
+                        "Anker 6ft USB-C Charging Cable",
+                        "Bose QuietComfort Earbuds II, Wireless",
+                        "Sony WH-1000XM4 Wireless Noise Canceling Headphones",
+                        "Logitech Wired Gaming Headset with Mic"
+                    ],
+                    strictness: 10
+                });
+            </script>
+            <p>The candidates are ordered by a hidden raw match score, so the order always stays the same regardless of the strictness level used, even when multiple confidence scores are 0:</p>
+            <script>
+                addJSONCodeBlock('Unwrapped Result', {
+                    target: "wireless noise cancelling headphones",
+                    strictness: 10,
+                    candidates_count: 4,
+                    average_confidence: 0.419,
+                    ordered_results: [
+                        {
+                            candidate: "Sony WH-1000XM4 Wireless Noise Canceling Headphones",
+                            match_confidence: 1
+                        },
+                        {
+                            candidate: "Bose QuietComfort Earbuds II, Wireless",
+                            match_confidence: 0.675
+                        },
+                        {
+                            candidate: "Logitech Wired Gaming Headset with Mic",
+                            match_confidence: 0
+                        },
+                        {
+                            candidate: "Anker 6ft USB-C Charging Cable",
+                            match_confidence: 0
+                        }
+                    ]
+                });
+            </script>
+
+            <br>
+
+            <h2 id="low-strictness-example">Low Strictness</h2>
+            <p>Using a low strictness is most useful for recommendation engines, where you want to find related concepts rather than exact matches:</p>
+            <script>
+                addJSONCodeBlock('Request Body', {
+                    target: "wireless noise cancelling headphones",
+                    candidates: [
+                        "Anker 6ft USB-C Charging Cable",
+                        "Bose QuietComfort Earbuds II, Wireless",
+                        "Sony WH-1000XM4 Wireless Noise Canceling Headphones",
+                        "Logitech Wired Gaming Headset with Mic"
+                    ],
+                    strictness: 0
+                });
+            </script>
+            <p>The confidence scores are now a lot higher because they are all somewhat related to the target:</p>
+            <script>
+                addJSONCodeBlock('Unwrapped Result', {
+                    target: "wireless noise cancelling headphones",
+                    strictness: 0,
+                    candidates_count: 4,
+                    average_confidence: 0.78,
+                    ordered_results: [
+                        {
+                            candidate: "Sony WH-1000XM4 Wireless Noise Canceling Headphones",
+                            match_confidence: 1
+                        },
+                        {
+                            candidate: "Bose QuietComfort Earbuds II, Wireless",
+                            match_confidence: 0.97
+                        },
+                        {
+                            candidate: "Logitech Wired Gaming Headset with Mic",
+                            match_confidence: 0.755
+                        },
+                        {
+                            candidate: "Anker 6ft USB-C Charging Cable",
+                            match_confidence: 0.397
+                        }
+                    ]
+                });
+            </script>
+
+        </section>
+
+    </main>
+
+
+
+    <script src="/js/main.js"></script>
+
+</body>
+
+
+</html>

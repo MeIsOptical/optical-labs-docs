@@ -53,6 +53,7 @@
 
             <div class="contentTableCategory">
                 <a href="#endpoints">Endpoints</a>
+                <a href="#ai-matching">AI Matching</a>
                 <a href="#profanity-censor">Profanity Censor</a>
                 <a href="#ai-moderation">AI Moderation</a>
                 <a href="#link-preview">Link Preview</a>
@@ -294,13 +295,18 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>AI Matching</td>
+                            <td>2 - 35 credits</td>
+                            <td>Order matches for a target text from a list of candidates.</td>
+                        </tr>
+                        <tr>
                             <td>Profanity Censor</td>
                             <td>1 credit</td>
                             <td>Remove bad words from a text.</td>
                         </tr>
                         <tr>
                             <td>AI Moderator</td>
-                            <td>10 - 12 credits</td>
+                            <td>10 / 12 credits</td>
                             <td>Detect harmful content with context-aware AI.</td>
                         </tr>
                         <tr>
@@ -325,6 +331,13 @@
 
         <section class="doc-section" id="endpoints">
             <h1>Endpoints</h1>
+
+            <h2 id="ai-matching">AI Matching</h2>
+            <p>This endpoint evaluates the relationship between a target text and multiple candidates using vector embeddings, returning an ordered list with precise similarity scores. Perfect for intelligent search, categorization, or recommendation engines.</p>
+            <a href="./ai-matching/" class="sub-page-btn">See documentation</a>
+
+            <br>
+            <br>
 
             <h2 id="profanity-censor">Profanity Censor</h2>
             <p>The profanity censor endpoint lets you input a text, and then returns a censored version of the original text. Multiple optional personalization options are available like a strictness level, censor style, a custom list of blacklisted words, and a custom list of whitelisted words.</p>
